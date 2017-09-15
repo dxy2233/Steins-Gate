@@ -1,2 +1,2 @@
-# Steins-Gate
-函数存储
+# El Psy Congruu
+各种资料
