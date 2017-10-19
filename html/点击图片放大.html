@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  #divCenter{
+    position: absolute;
+    z-index: 9;
+    display: none;
+    background-color: rgba(52,52,52, 0.8);
+    height: 100%;
+    width: 100%;
+  }
+  #divCenter img{
+    position: absolute;
+    display: block;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  </style>
+</head>
+<body>
+  <div id="divCenter" onclick="picClose()" align="center">
+    <img src=""/>
+  </div>
+  <a href="javascript:void(0)" onclick="picBig($(this).children('img').attr('src'))"><img src="" alt=""></a>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+  <script type="text/javascript">
+     function picBig(imgSrc) {
+       if(imgSrc == '') return;
+       else {
+         $('#divCenter').children('img').attr('src',imgSrc);
+         $('#divCenter').show();
+       }
+     }
+     function picClose() {
+       $('#divCenter').hide();
+     }
+  </script>
+</body>
+</html>
