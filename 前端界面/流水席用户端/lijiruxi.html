@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>入席</title>
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="js/style.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/base.js"></script>
+
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/index.css" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="ruxibox">
+				<div class="ruxinavbox">
+					<i><img src="img/ruxiimg.png"/></i>
+					<div class="ruxititile">
+						<div class="ruxititile_name">泰式海鲜营养套餐 经典10人餐</div>
+						<div class="ruxititile_dianming">丽芙麻辣海鲜</div>
+						<div class="ruxititile_morey">￥<label>28.0</label></div>
+
+					</div>
+				</div>
+				<div class="ruxishuliangruxi">
+					<span class="shuliangruxi">数量</span>
+					<span class="ruxi_shengyu">剩<label>1</label>位</span>
+					<span class="jiajianruxirenshu"> 
+			 			<div class="mui-numbox" data-numbox-step='1' data-numbox-min='0' data-numbox-max='100'>
+						  <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+						  <input class="mui-numbox-input" type="number" />
+						  <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+						</div>
+			 		</span>
+				</div>
+				<div class="fanpiaodikoiu">
+					<span class="fanpiaodikoutiti">饭票抵扣</span>
+					<span class="dikoumorey">
+			 			<span class="dikoumorey_moery">
+			 				<label>可用￥</label>
+			 				<label>28.00</label>
+			 			</span>
+					<span class="ruxijinepinut"><input type="text"></span>
+					</span>
+				</div>
+				<div class="xiaoji_ruxi">
+					<span>小计</span>
+					<span class="xiaojijinebox">￥<label>28.00</label></span>
+				</div>
+
+			</div>
+			<div class="xq_renshu">
+				<div class="xq_age1">
+					<span class="dinshi">12:26<label> 开席</label></span>
+					<span class="xq_ren_name">贞观科技聚餐 </span>
+					<span class="renhsugershu">
+			 	 		<i class="renshuicon"><img src="img/renshuimg_03.png"/></i>
+			 	 		<span><label>9</label>/<label>10</label> </span>
+					</span>
+				</div>
+				<div class="renshutoux">
+					<span class="iconrsu">
+			 	 		<i class="renshutou"><img src="img/renshutoux.png"/></i>
+			 	 		<i class="renshutou"><img src="img/renshutoux.png"/></i>
+			 	 		<i class="renshutou"><img src="img/renshutoux.png"/></i>
+			 	 		<i class="renshutou"><img src="img/renshutoux.png"/></i>
+			 	 		<i class="renshutou"><img src="img/renshutoux.png"/></i>
+			 	 	</span>
+					<span class="xsyc"><i class="chkangend"><img src="img/chakanquanbuicon.png"/></i></span>
+				</div>
+				<div class="gengduotoux">
+					<span class="iconrsu">
+			 	 		<i class="renshutou"><img src="img/renshutoux.png"/></i>
+			 	 		<i class="renshutou"><img src="img/renshutoux.png"/></i>
+			 	 		<i class="renshutou"><img src="img/renshutoux.png"/></i>
+			 	 		<i class="renshutou"><img src="img/renshutoux.png"/></i>
+			 	 		<i class="renshutou"><img src="img/renshutoux.png"/></i>
+			 	 	</span>
+				</div>
+				<div class="xq_lijiruxi">
+					<span class="zuohoa">桌号：<label>09</label></span>
+					<a href="#" class="lijiruxixq"><img src="img/yipinman.png" /></a>
+				</div>
+			</div>
+            <!--确认支付-->
+            <div class="qierenzhifubtn">
+            	  <div class="zhifu_zongji">总计：<span>￥<label>28.0</label></span></div>
+            	  <div class="zhifu_quer4nebnt"><a href="lijiruxi_zhifuchenggong.html">确认付款</a></div>
+            </div>
+            
+            
+		</div>
+	</body>
+	<script>
+		$(function() {
+			$(".chkangend").click(function() {
+				var Obj = $(this).parents('.xq_renshu').children(".gengduotoux");
+				if(Obj.css('display') == 'none') {
+					$(this).children().attr("src", "img/shouqiicon.png");
+					$(this).parent().parent().siblings(".gengduotoux").slideDown();
+				} else if(Obj.css('display') == 'block') {
+					$(this).children().attr("src", "img/chakanquanbuicon.png");
+					$(this).parent().parent().siblings(".gengduotoux").slideUp();
+				}
+			});
+		});
+	</script>
+
+</html>

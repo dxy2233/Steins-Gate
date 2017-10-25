@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="css/jcDate.css" />
+		<style>
+			input[type="file"] {
+			  color: transparent;
+			}
+		</style>
+	</head>
+	<body>
+		 <div class="combox">
+		 	<!--所在位置显示-->
+			<div class="weizhixianshi">
+				<span>你的位置：</span><a href="javascript:window.history.back(-1)" class="label">轮播图管理</a>><label>添加轮播图</label>
+			</div>
+		 	<!--财务管理-->
+			<div class="caiwuguanli">
+				<div class="shagnjianname">
+					<span>轮播图说明：<input type="text" class="shagn_name_ipu" placeholder="请输入轮播图说明"></span> 
+				</div>
+				<div class="shagnjianname">
+					<span>　链接地址：<input type="text" class="shagn_name_ipu" placeholder="请输入地址"></span> 
+				</div> 
+			    <div class="shagnjianname" style="height: 185px;">
+					<span>　图片上传：<label class="file0"><img src="img/shagnchuan.png"/><input type="file" class="file1" ></label></span> 
+				</div> 
+				<div class="shagnjianname">
+		 		   <input type="submit" class="queren queren2" style="float: left;background: #1c93e6;margin-left: 93px;" value="确认添加">
+				</div> 
+			     
+			    
+			</div>
+		 	
+		 </div>
+	  
+	</body>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+	<script src="js/jQuery-jcDate.js"></script>
+	<script>
+		$(function() {
+			$(".jcDate").jcDate({
+				IcoClass: "jcDateIco",
+				Event: "click",
+				Speed: 100,
+				Left: 0,
+				Top: 28,
+				format: "-",
+				Timeout: 100
+			});
+			
+			var Gid = document.getElementById;
+
+			var showArea = function() {
+
+				Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
+
+					Gid('s_city').value + " - 县/区" +
+
+					Gid('s_county').value + "</h3>"
+
+			}
+ 
+			
+			
+		});
+	</script>
+</html>

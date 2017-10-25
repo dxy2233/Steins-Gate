@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>绑定银行卡</title>
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/style.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/base.css" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<div class="box">
+		    <div class="bd_yhka">
+		    	<p><label class="bd_nameage">招商银行1</label><i><img src="img/guanbiiconimg.png"/></i></p>
+		    	<p><label class="bd_nameageoutput">赵先生</label></p>
+		    	<p class="bd_kahoao">**** **** **** 1234</p>
+		    </div>
+		    <div class="bd_yhka">
+		    	<p><label class="bd_nameage">招商银行2</label><i><img src="img/guanbiiconimg.png"/></i></p>
+		    	<p><label class="bd_nameageoutput">赵先生</label></p>
+		    	<p class="bd_kahoao">**** **** **** 1234</p>
+		    </div>
+		    <div class="bd_yhka">
+		    	<p><label class="bd_nameage">招商银行3</label><i><img src="img/guanbiiconimg.png"/></i></p>
+		    	<p><label class="bd_nameageoutput">赵先生</label></p>
+		    	<p class="bd_kahoao">**** **** **** 1234</p>
+		    </div>
+		    <div class="bd_yhka">
+		    	<p><label class="bd_nameage">招商银行4</label><i><img src="img/guanbiiconimg.png"/></i></p>
+		    	<p><label class="bd_nameageoutput">赵先生</label></p>
+		    	<p class="bd_kahoao">**** **** **** 1234</p>
+		    </div>
+		    <!--添加银行卡-->
+		    <div class="addyhkaboz"><i><img src="img/yinhangimgcion.png"/></i><a href="tianjiayinhangka_index.html">添加银行卡</a></div>
+		</div>
+	</body>
+    <script>
+    	$(function(){
+    		$(".bd_nameage").siblings("i").children("img").click(function(){
+    			$(this).parents().parents().parents(".bd_yhka").hide(); 
+    		})
+    	})
+    	 
+    	
+    </script>
+</html>

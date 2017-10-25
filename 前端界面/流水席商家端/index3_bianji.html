@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>编辑流水席</title>
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="js/DateTimePicker.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/style.js"></script>
+		<link rel="stylesheet" href="css/DateTimePicker.css" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/base.css" />
+
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="chakna">
+				<div class="chapage1">
+					<span>席状态</span>
+					<label>已停席</label>
+					<button class="kaixil">开席</button>
+				</div>
+				<div class="fenmian">
+					<span>封面图</span>
+					<label><img src="img/chakanimg.png"/></label>
+				</div>
+				<div class="chapage1">
+					<span>名称</span>
+					<label><input type="text" class="jidian" value="经典四人餐"></label>
+				</div>
+				<a href="index3_leibie.html" class="chapage1">
+					<span>类别</span>
+					<label class="leibir2">中餐</label>
+					<i class="lefig"><img src="img/leftimg.png"/></i>
+				</a>
+				<div class="tishi">
+					<span>菜品</span>
+					<label>* 菜品的价格不会作为实际价格结算，只作展示用</label>
+				</div>
+				<!--显示菜品-->
+				<div class="caipinbox">
+					<div class="tianjia_caipingbox">
+						<span class="caiage_ming">特色北京烤鸭特色北京烤鸭特色北京烤鸭</span>
+						<span>
+					 		<div class="mui-numbox jainbtnan" data-numbox-step='1' data-numbox-min='0' data-numbox-max='100'>
+								<button class="mui-btn mui-numbox-btn-minus jiabtnboxpage1" type="button">-</button>
+								<input class="mui-numbox-input shuliang" type="number" />
+								<button class="mui-btn mui-numbox-btn-plus jiabtnboxpage2" type="button">+</button>
+							</div>
+					 	</span>
+						<input type="hidden" class="price" value="198" />
+						<span class="caiage_jiage">￥<label class="jiagemory">198</label></span>
+					</div>
+					<div class="tianjia_caipingbox">
+						<span class="caiage_ming">特色北京烤鸭</span>
+						<span>
+					 		<div class="mui-numbox jainbtnan" data-numbox-step='1' data-numbox-min='0' data-numbox-max='100'>
+								<button class="mui-btn mui-numbox-btn-minus jiabtnboxpage1" type="button">-</button>
+								<input class="mui-numbox-input shuliang" type="number" />
+								<button class="mui-btn mui-numbox-btn-plus jiabtnboxpage2" type="button">+</button>
+							</div>
+					 	</span>
+						<input type="hidden" class="price" value="198" />
+						<span class="caiage_jiage">￥<label class="jiagemory">198</label></span>
+					</div>
+
+				</div>
+				<!--加减符号-->
+				<div class="jiajianbtn">
+					<a href="tianjiacaipin.html" class="jaiimg"><img src="img/bianjijia.png" /></a>
+					<a href="shanchucaipin.html" class="jaiimg"><img src="img/jianbtn.png" /></a>
+				</div>
+				<div class="chapage1" style="padding-right: 0rem;">
+					<span>每位价格</span>
+					<label class="jiagexiugai"><input type="text" class="danjaimor" value="28"></label>
+				</div>
+				<div class="chapage1">
+					<span>开席人数</span>
+					<div class="mui-numbox jainbtnan" data-numbox-step='1' data-numbox-min='0' data-numbox-max='100'>
+						<button class="mui-btn mui-numbox-btn-minus renshubtnj1" type="button">-</button>
+						<input class="mui-numbox-input renshubtnjinput" type="number" />
+						<button class="mui-btn mui-numbox-btn-plus renshubtnj2" type="button">+</button>
+					</div>
+				</div>
+				<div class="chapage1" style="padding-right: 0rem;">
+					<span>每席总价</span>
+					<label class="jiagexiugai"><label>22</label></label>
+				</div>
+				<div class="chapage1">
+					<span>每日最多开席数</span>
+					<div class="mui-numbox jainbtnan" data-numbox-step='1' data-numbox-min='0' data-numbox-max='100'>
+						<button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+						<input class="mui-numbox-input" type="number" />
+						<button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+					</div>
+
+				</div>
+
+				<div class="kaiqishijian">
+					<span>开启时间</span>
+					<label>
+					  <input type="text" class="kaiqiiput" data-field="time" readonly placeholder="请选择时间段">  
+		              </label>
+					<div id="dtBox"></div>
+				</div>
+				
+				<div class="kaiqishijian" style="margin-top: 0rem;">
+					<span>关闭时间</span>
+					<label>
+					  <input type="text" class="kaiqiiput" data-field="time" readonly placeholder="请选择时间段">  
+		              </label>
+					<div id="dtBox"></div>
+				</div>
+				
+
+			</div>
+			<div class="bianjitijia">
+				<button class="btn1">确认保存</button>
+				<button class="btnsc">删除</button>
+			</div>
+		</div>
+	</body>
+	<script>
+		$(document).ready(function() {
+			$("#dtBox").DateTimePicker({
+				dateFormat: "dd-MMM-yyyy"
+			});
+		});
+
+		$(function() {
+			$(".jiabtnboxpage2").click(function() {
+				setAmountCount($(this), $(this).parents('.tianjia_caipingbox').eq(0).find('.jiagemory').eq(0));
+			});
+			$(".jiabtnboxpage1").click(function() {
+				setAmountCount($(this), $(this).parents('.tianjia_caipingbox').eq(0).find('.jiagemory').eq(0));
+			});
+
+			/*价格，人数，总价*/
+			$(".renshubtnj2").click(function() {
+				setageout();
+
+			})
+
+		});
+		/*人数*每位价格*/
+		function setageout() {
+			/*人数*/
+			var renshubtnjinput = $(".renshubtnjinput").val();
+			/*单价*/
+			var danjia = $(".danjaimor").val();
+			var zo = renshubtnjinput * danjia;
+
+			$(".jiagexiugai").children("label").text(zo);
+
+		}
+
+		/*菜品数量*单价*/
+		function setAmountCount(Obj, textObj) {
+			var jiagemoryobj = parseInt(Obj.parents('.tianjia_caipingbox').eq(0).find('.price').val());
+			var shuliang = Obj.siblings("input").val();
+			textObj.text(shuliang * jiagemoryobj);
+		}
+	</script>
+
+</html>

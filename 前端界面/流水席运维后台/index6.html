@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+	<body style="width: 100%;height: 100%;background: url(img/bg.png) no-repeat right;background-position-y: -170px;">
+		 <div class="combox">
+		 	<!--所在位置显示-->
+			<div class="weizhixianshi">
+				<span>你的位置：</span><label>流水席类别设置</label>
+			</div>
+			<!--流水席类别设置-->
+		 	<div class="shagnjiachakan">
+		 		<div class="chakntongji" style="width: 100%;border-bottom: none;">
+		 			<div class="shagnjiaqiben" style="margin-bottom: 20px;"><a href="#" class="xinzen_dianpu" style="float: right;background: #1c93e6;">添加类别</a></div>
+		 			<table class="gongsuou" cellpadding="0" cellspacing="0" >
+						  <tr class="gong_nav">
+						  	  <td class="lefttalbe">类别</td>
+						  	  <td>排序</td> 
+						  	  <td class="righttalble">操作</td> 
+						  </tr>
+						  <tbody> 
+						  	 <tr>
+						  	 	<td>中餐</td>
+						  	 	<td>14</td> 
+						  	 	<td class="taibcloor" style="cursor: pointer;">编辑</td>
+						  	 </tr> 
+						  	  <tr>
+						  	 	<td>中餐</td>
+						  	 	<td>14</td> 
+						  	 	<td class="taibcloor" style="cursor: pointer;">编辑</td>
+						  	 </tr>
+						  	  <tr>
+						  	 	<td>中餐</td>
+						  	 	<td>14</td> 
+						  	 	<td class="taibcloor" style="cursor: pointer;">编辑</td>
+						  	 </tr>
+						  	  <tr>
+						  	 	<td>中餐</td>
+						  	 	<td>14</td> 
+						  	 	<td class="taibcloor" style="cursor: pointer;">编辑</td>
+						  	 </tr>
+						  	  <tr>
+						  	 	<td>中餐</td>
+						  	 	<td>14</td> 
+						  	 	<td class="taibcloor" style="cursor: pointer;">编辑</td>
+						  	 </tr>
+						  	  <tr>
+						  	 	<td>中餐</td>
+						  	 	<td>14</td> 
+						  	 	<td class="taibcloor" style="cursor: pointer;">编辑</td>
+						  	 </tr>
+						  	  <tr>
+						  	 	<td>中餐</td>
+						  	 	<td>14</td> 
+						  	 	<td class="taibcloor" style="cursor: pointer;">编辑</td>
+						  	 </tr>
+						  	  <tr>
+						  	 	<td>中餐</td>
+						  	 	<td>14</td> 
+						  	 	<td class="taibcloor" style="cursor: pointer;">编辑</td>
+						  	 </tr>
+						  	 
+						  	 
+						  	 
+						  </tbody> 
+					</table>
+					 <!--分页-->
+			 	    <div class="fenye">
+			 	    	<div class="fenye_conbox">
+			 	    		<div class="fenye_titile">
+			 	    			显示<span>1-10</span>条记录，共<span>548</span>条记录<label>　|　</label>
+			 	    			<a href="#">首页</a><a href="#">上一页</a><a href="#">下一页</a><a href="#">尾页</a>
+			 	    		    <input type="text" class="text" />
+			 	    		    <input type="submit" value="跳 转" class="tiaozhuan" />
+			 	    		</div>
+			 	    	</div>
+			 	    </div>
+		 		</div>  
+		 	</div> 
+		 	<!--弹框-->
+			 <div class="tankuang_xiugai">
+			 	<div class="tiank_name">编辑类别</div>
+		 	    <div class="tiank_xiugai_jine">类别名称:<input type="text" class="in_jine"><label> <img src="img/xinhao_icon.png"/></label></div>
+		 	    <div class="tiank_xiugai_jine paixu">排序:<input type="text" style="width: 64px;" class="in_jine"><label class="zisufanwei"> 字数范围0~255，数字越小越靠前</label></div>
+			 	  
+			 	<div class="tankuagn_btn" style="top: -20px;">
+			 		<input type="submit" value="确认" class="tan_queren" />
+			 		<input type="submit" value="取消" class="tan_quxiao" />
+			 	</div> 
+			 </div> 
+		 	
+		 	
+		 </div> 
+	</body>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+	<script>
+		$(function(){ 
+			var i=$(".in_jine").val(); 
+			$(".taibcloor").click(function(){
+				$(".tiank_name").text("编辑类别"); 
+				$(".tankuang_xiugai").show();  
+			});
+			$(".shagnjiaqiben").click(function(){
+				$(".tiank_name").text("添加类别");
+				$(".tankuang_xiugai").show();
+				
+			});
+			
+			
+			$(".tan_quxiao").click(function(){
+				$(".tankuang_xiugai").hide(); 
+			});
+			
+		})
+		
+	</script>
+</html>

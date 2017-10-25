@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="css/jcDate.css" />
+		
+	</head>
+	<body>
+		 <div class="combox">
+		 	<!--所在位置显示-->
+			<div class="weizhixianshi">
+				<span>你的位置：</span><a href="javascript:window.history.back(-1)" class="label">财务管理</a>><label>审核商家提现申请</label>
+			</div>
+		 	<!--财务管理-->
+			<div class="caiwuguanli">
+				<div class="shagnjianname">
+					<span>商家名称：<input type="text" class="shagn_name_ipu" placeholder="请输入商家名称"></span>
+					<span>
+						申请提现日期：
+						<input class="jcDate" style="width:120px; height:20px; line-height:20px; padding:4px;border: none;border: 1px solid #ccc;" />
+						<label>-</label>
+						<input class="jcDate" style="width:120px; height:20px; line-height:20px; padding:4px;border: none;border: 1px solid #ccc;" />
+					</span>
+					<span style="margin-right: 0px;">审核状态：<select class="zhaugntai"><option>全部状态</option></select></span>
+					<input type="submit" class="xinzen_dianpu" style="background: #1c93e6;margin-right: 0px;" value="搜 索">
+				</div>
+				 
+				
+				<!--搜索表单-->
+				<div class="suoshoubiaosdan">
+					<div class="gongshi">共搜索到<span>922</span>条数据
+					<input type="submit" class="xinzen_dianpu" style="background: #1c93e6;margin-right: 0px;" value="导 出">
+					
+					</div>
+					<table class="gongsuou" cellpadding="0" cellspacing="0"> 
+						  <tr class="gong_nav">
+						  	  <td class="lefttalbe">商家名称</td>
+						  	  <td>店主手机号</td>
+						  	  <td>申请提现金额</td>
+						  	  <td>余额</td>
+						  	  <td>状态</td>
+						  	  <td>申请日期 </td>
+						  	  <td>操作者 </td>
+						  	  <td>操作</td>
+						  	   
+						  </tr>
+						  <tbody> 
+						  	 <tr>
+						  	 	<td>乡村基（财富店）</td>
+						  	 	<td>13854688854</td>
+						  	 	<td>￥32759</td>
+						  	 	<td>￥32759</td>
+						  	 	<td>已通过</td>
+						  	 	<td>2015-9-26</td>
+						  	 	<td>系统管理员</td>
+						  	 	<td><a href="#" onclick="xianshi();">查看　</a><a href="#" class="zhuangtaiyanse">通过　</a><a href="#" class="zhuangtaiyanse">拒绝　</a></td> 
+						  	 </tr> 
+						  	 <tr>
+						  	 	<td>乡村基（财富店）</td>
+						  	 	<td>13854688854</td>
+						  	 	<td>￥32759</td>
+						  	 	<td>￥32759</td>
+						  	 	<td>已拒绝</td>
+						  	 	<td>2015-9-26</td>
+						  	 	<td>系统管理员</td>
+						  	 	<td><a href="#" onclick="xianshi();">查看　</a><a href="#" class="zhuangtaiyanse">通过　</a><a href="#" class="zhuangtaiyanse">拒绝　</a></td> 
+						  	 </tr>
+						  	 <tr>
+						  	 	<td>乡村基（财富店）</td>
+						  	 	<td>13854688854</td>
+						  	 	<td>￥32759</td>
+						  	 	<td>￥32759</td>
+						  	 	<td>待审核</td>
+						  	 	<td>2015-9-26</td>
+						  	 	<td>系统管理员</td>
+						  	 	<td><a href="#" onclick="xianshi();">查看　</a><a href="#">通过　</a><a href="#" onclick="jujue();">拒绝　</a></td> 
+						  	 </tr>
+						  	 <tr>
+						  	 	<td>乡村基（财富店）</td>
+						  	 	<td>13854688854</td>
+						  	 	<td>￥32759</td>
+						  	 	<td>￥32759</td>
+						  	 	<td>待审核</td>
+						  	 	<td>2015-9-26</td>
+						  	 	<td>系统管理员</td>
+						  	 	<td><a href="#" onclick="xianshi();">查看　</a><a href="#">通过　</a><a href="#" onclick="jujue();">拒绝　</a></td> 
+						  	 </tr>  
+						  	 <tr>
+						  	 	<td>乡村基（财富店）</td>
+						  	 	<td>13854688854</td>
+						  	 	<td>￥32759</td>
+						  	 	<td>￥32759</td>
+						  	 	<td>待审核</td>
+						  	 	<td>2015-9-26</td>
+						  	 	<td>系统管理员</td>
+						  	 	<td><a href="#" onclick="xianshi();">查看　</a><a href="#">通过　</a><a href="#" onclick="jujue();">拒绝　</a></td> 
+						  	 </tr>  
+						  	 <tr>
+						  	 	<td>乡村基（财富店）</td>
+						  	 	<td>13854688854</td>
+						  	 	<td>￥32759</td>
+						  	 	<td>￥32759</td>
+						  	 	<td>待审核</td>
+						  	 	<td>2015-9-26</td>
+						  	 	<td>系统管理员</td>
+						  	 	<td><a href="#" onclick="xianshi();">查看　</a><a href="#">通过　</a><a href="#" onclick="jujue();">拒绝　</a></td> 
+						  	 </tr>  
+						  	 <tr>
+						  	 	<td>乡村基（财富店）</td>
+						  	 	<td>13854688854</td>
+						  	 	<td>￥32759</td>
+						  	 	<td>￥32759</td>
+						  	 	<td>待审核</td>
+						  	 	<td>2015-9-26</td>
+						  	 	<td>系统管理员</td>
+						  	 	<td><a href="#" onclick="xianshi();">查看　</a><a href="#">通过　</a><a href="#" onclick="jujue();">拒绝　</a></td> 
+						  	 </tr>  
+						  	 
+						  	 
+						  </tbody> 
+					</table>
+					 <!--分页-->
+			 	    <div class="fenye">
+			 	    	<div class="fenye_conbox">
+			 	    		<div class="fenye_titile">
+			 	    			显示<span>1-10</span>条记录，共<span>548</span>条记录<label>　|　</label>
+			 	    			<a href="#">首页</a><a href="#">上一页</a><a href="#">下一页</a><a href="#">尾页</a>
+			 	    		    <input type="text" class="text" />
+			 	    		    <input type="submit" value="跳 转" class="tiaozhuan" />
+			 	    		</div>
+			 	    	</div>
+			 	    </div> 
+				</div> 
+			</div>
+		 
+		    <!--弹框-->
+			 <div class="tankuang_xiugai">
+			 	<div class="tiank_name">银行卡信息</div>
+			 	<div class="tiank_xiugai_jine">姓　名：<span>斯蒂芬</span></div>
+			 	<div class="tiank_xiugai_jine" style="margin-top: 3px;position: relative; left: 58px;">银行卡号：<span>62255831555544814491</span></div>
+			 	<div class="tiank_xiugai_jine" style="margin-top: 3px;">　 开户行：<span>招商银行</span></div>
+			 	<!--拒绝理由-->
+			 	<textarea class="jujue_textrer"></textarea>
+			 	<div class="tankuagn_btn">
+			 		<input type="submit" value="确认" class="tan_queren" />
+			 		<input type="submit" value="取消" class="tan_quxiao" onclick="quxiao();" />
+			 	</div> 
+			 </div>
+			 <!--拒绝弹框-->
+			 <div class="tankuang_xiugai1">
+			 	<div class="tiank_name">拒绝</div>
+			 	<div class="tiank_xiugai_jine jujue">拒绝理由：</div> 
+			 	<!--拒绝理由-->
+			 	<textarea class="jujue_textrer"></textarea>
+			 	<div class="tankuagn_btn tankuagn_btn1">
+			 		<input type="submit" value="确认" class="tan_queren" />
+			 		<input type="submit" value="取消" class="tan_quxiao" onclick="quxiao();" />
+			 	</div> 
+			 </div>
+			 
+			 
+			 
+		 </div>
+	  
+	</body>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+	<script src="js/jQuery-jcDate.js"></script>
+	<script>
+		$(function() {  
+			$(".jcDate").jcDate({
+				IcoClass: "jcDateIco",
+				Event: "click",
+				Speed: 100,
+				Left: 0,
+				Top: 28,
+				format: "-",
+				Timeout: 100
+			});
+			
+			var Gid = document.getElementById;
+
+			var showArea = function() {
+
+				Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
+
+					Gid('s_city').value + " - 县/区" +
+
+					Gid('s_county').value + "</h3>"
+
+			} 
+			
+		});
+		function xianshi(){
+				$(".tankuang_xiugai").show();
+				$(".jujue_textrer").hide();
+				$(".tankuang_xiugai1").hide(); 
+				
+			}
+		
+		function quxiao(){
+				 $(".tankuang_xiugai").hide(); 
+				$(".tankuang_xiugai1").hide(); 
+				 
+			}
+		/*拒绝*/
+		function jujue(){
+				$(".tankuang_xiugai1").show(); 
+				$(".jujue_textrer").show();
+		}
+			 
+		
+	</script>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>修改资料</title>
+		<link rel="stylesheet" href="css/index.css" />
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+	</head>
+	<body>
+		 <div class="combox">
+		 	<!--所在位置显示-->
+			<div class="weizhixianshi">
+				<span>你的位置：</span><label>修改资料</ label>
+			</div>
+		 	<!--修改资料-->
+		 	<div class="xiugaibox xiugaibox1">
+		 		<div class="xiugai_name"><span>管理员账号：</span><label>admin</label></div>
+		 		<div class="xiugai_name"><span>登录密码：</span><button class="xiugaimiam">修改密码</button></div>
+		 		<div class="xiugai_name"><span>姓名：</span><label><input type="text" class="input_xiugai" /></label></div>
+		 		<div class="xiugai_name"><span>手机号：</span><label><input type="text" class="input_xiugai" /></label></div>
+		 		<div class="xiugai_name"><span>拥有权限：</span><label class="yonghua">用户管理、商家管理、财务管理</label></div>
+		 		<div class="xiugai_name"><span></span><label><button class="querenbaocun">确认保存</button></label></div>
+		 		 
+		 	</div>
+		 	
+		 	<!--修改资料-->
+		 	<div class="xiugaibox xiugaibox2"> 
+		 		<div class="xiugai_name"><span>原密码：</span><label><input type="password" class="input_xiugai pwd1" /></label></div>
+		 		<div class="xiugai_name"><span>新密码：</span><label><input type="password" class="input_xiugai pwd2" /></label></div>
+		 		<div class="xiugai_name"><span>确认密码：</span><label><input type="password" class="input_xiugai pwd3" /></label></div>
+		 		<div class="xiugai_name"><span></span><label><button class="querenbaocun">确认修改</button></label></div>
+		 		
+		 	</div> 
+		 </div>
+	</body>
+	<script>
+		$(function(){
+			$(".xiugaimiam").click(function(){
+				$(".xiugaibox1").hide();
+				$(".xiugaibox2").show();
+			});
+			$(".querenbaocun").click(function(){
+				
+				var pwd1= $(".pwd1").val(); 
+				var pwd2= $(".pwd2").val(); 
+				var pwd3= $(".pwd3").val(); 
+				if(pwd1=="" || pwd2=="" || pwd3==""){
+					alert("请输入密码"); 
+				}else{
+					$(".xiugaibox2").hide();
+				    $(".xiugaibox1").show(); 
+				}
+				
+			});
+		})
+		
+	</script>
+</html>
