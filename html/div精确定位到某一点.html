@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .cc {
+            height: 300px;
+            width: 300px;
+            border: 1px solid #ccc;
+            margin-left: 500px;
+            margin-top: 200px;
+        }
+
+        .tag {
+            height: 5px;
+            width: 5px;
+            background-color: aqua;
+            margin-left: 100px;
+            margin-top: 100px;
+        }
+
+        button {
+            margin-left: 500px;
+        }
+
+        .spe {
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            border: 1px solid #ccc;
+            text-align: center;
+            line-height: 100px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="cc">
+        <div class="tag"></div>
+    </div>
+    <button>action</button>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script>
+        $('button').click(function() {
+            $('.cc').append('<div class="spe">1</div>');
+            var l = parseInt($('.tag').css('margin-left'));
+            var t = parseInt($('.tag').css('margin-top'));
+            $('.spe').css('top', 200 + t - 50 + 'px');
+            $('.spe').css('left', 500 + l - 50 + 'px');
+        });
+
+    </script>
+</body>
+
+</html>
