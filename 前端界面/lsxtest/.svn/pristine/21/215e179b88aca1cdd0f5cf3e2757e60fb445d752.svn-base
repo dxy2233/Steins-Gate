@@ -1,0 +1,80 @@
+<?php
+/* Smarty version {Smarty::SMARTY_VERSION}, created on 2017-09-18 07:25:33
+  from "E:\lsxtest\backend\web\modules\site\layouts\main.tpl" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.32-dev-22',
+  'unifunc' => 'content_59bf74ed121306_86393051',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '447e566bb5e637f0d54fa7ec2d58a3eb837a5ac5' => 
+    array (
+      0 => 'E:\\lsxtest\\backend\\web\\modules\\site\\layouts\\main.tpl',
+      1 => 1505373045,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_59bf74ed121306_86393051 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+
+
+
+    
+    
+    
+    
+    
+    
+
+
+
+    
+    
+        
+        
+        
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+        
+
+    
+    
+    
+        
+            
+            
+                
+                
+                
+            
+        
+        
+        
+            
+        
+    
+
+
+
+
+    
+
+
+
+<?php }
+}

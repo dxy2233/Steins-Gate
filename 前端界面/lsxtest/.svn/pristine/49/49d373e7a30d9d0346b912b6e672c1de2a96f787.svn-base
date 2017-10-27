@@ -1,0 +1,57 @@
+<?php
+//$config['controllerMap']['goods'] = 'app\modules\goods\controllers\GoodsController';
+//$config['bootstrap'][] = 'gii';
+//$config['modules']['gii'] = 'yii\gii\Module';
+return [
+    'viewpath' => '@app/web/modules',
+    'layoutPath' => '@app/web/modules/site/layouts/',
+    'components' => [
+        'request' => [
+            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+            'cookieValidationKey' => 'YGFzlchYrFdWqq3Va1YZwristy5oW0I7',
+        ],
+//        'bootstrap' => [
+//            ''=> 'gii'
+//        ],
+        'moduels'=>[
+            'class'=>'',
+            'gii'=>'yii\gii\Module'
+        ],
+        'controllerMap'=>[
+            'class'=>'',
+            'goods'=>'app\modules\goods\controllers\GoodsController',
+            'index'=>'app\modules\index\controllers\IndexController',
+            'user'=>'app\modules\user\controllers\CenterController',
+            'order'=>'app\modules\order\controllers\OrderController',
+            'respond'=>'app\controllers\RespondController',
+//            'index'=>'app\modules\payment\controllers\IndexController',
+        ],
+
+        'view' => [
+            'class' => '\yii\web\View',
+            'theme' => [
+                'basePath' => '@app/web',
+                'baseUrl' => '',
+                'pathMap' => [
+                    '@app/views' => '@app/web',
+                    '@app/modules' => '@app/web/modules'
+                ]
+            ]
+        ]
+
+],
+    'layout'=>'@app/web/modules/site/layouts/main.tpl'
+];
+
+//$config['bootstrap'][] = 'gii';
+//$config['modules']['gii'] = 'yii\gii\Module';
+//$config = yii\helpers\ArrayHelper::merge($config,
+//    'components' => [
+//                'request' => [
+//                    'cookieValidationKey' => 'YGFzlchYrFdWqq3Va1YZwristy5oW0I7',
+//                              ],
+//                         ],
+//);
+//$config['controllerMap']['goods'] = 'app\modules\goods\controllers\GoodsController';
+//return $config;
+

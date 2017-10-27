@@ -1,0 +1,88 @@
+$('.bianji_left .input_bainji:nth-child(1) input').blur(function () {
+					if( $('.bianji_left .input_bainji:nth-child(1) input').val().length >= 16 ){
+						alert('商家名称请在16个字以内');
+					}
+					else if( $('.bianji_left .input_bainji:nth-child(1) input').val().length ==0 ){
+						alert('商家名称不能为空');
+					}
+				});
+
+				$('.bianji_left .input_bainji:nth-child(2) input').blur(function () {
+					if( $('.bianji_left .input_bainji:nth-child(2) input').val().length >= 16 ){
+						alert('商家登录账号请在16个字符以内');
+					}
+					else if( $('.bianji_left .input_bainji:nth-child(2) input').val().length ==0 ){
+						alert('商家登录账号不能为空');
+					}
+				});
+
+				$('.bianji_left .input_bainji:nth-child(3) input').blur(function () {
+					var str = $('.bianji_left .input_bainji:nth-child(3) input').val().replace(/\s+/g,"");
+					$('.bianji_left .input_bainji:nth-child(3) input').val( str );
+					if( str.length >= 16 ){
+						alert('密码请小于16个字符');
+					}
+					else if( str.length <=6 ){
+						alert('密码请大于6个字符');
+					}
+				});
+
+				$('.bianji_left .input_bainji:nth-child(4) input').blur(function () {
+					if( $('.bianji_left .input_bainji:nth-child(4) input').val().length > 12 ){
+						alert('店主姓名请在12个字符以内');
+					}
+					else if( $('.bianji_left .input_bainji:nth-child(4) input').val().length ==0 ){
+						alert('店主姓名不能为空');
+					}
+				});
+
+				$('.bianji_left .input_bainji:nth-child(5) input').blur(function () {
+					if( !/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/.test( $('.bianji_left .input_bainji:nth-child(5) input').val()) ){
+						alert('请检查手机号');
+					}
+				});
+
+				$('.bianji_left .input_bainji:nth-child(6) input').blur(function () {
+					if( !/^[1-9][0-9]*$/.test( $('.bianji_left .input_bainji:nth-child(6) input').val()) ){
+						alert('请输入正确的商家面积');
+					}
+				});
+
+				$('.bianji_left .input_bainji:nth-child(7) input').blur(function () {
+					if( !/^[1-9][0-9]*$/.test( $('.bianji_left .input_bainji:nth-child(7) input').val()) ){
+						alert('请输入正确的座位数');
+					}
+				});
+
+				$('.bianji_left .input_bainji:nth-child(8) input').blur(function () {
+					if( !/^100$|^(\d|[1-9]\d)$/.test( $('.bianji_left .input_bainji:nth-child(8) input').val()) ){
+						alert('请输入0-100的整数');
+					}
+				});
+
+				$('.bianji_right .input_bainji:nth-child(1) input').blur(function () {
+					if( !/^(0|[1-9]\d{0,10})$/.test( $('.bianji_right .input_bainji:nth-child(1) input').val()) ){
+						alert('请输入正确的号码');
+					}
+				});
+
+				$('.bianji_right .input_bainji:nth-child(3) input').blur(function () {
+					if( $('.bianji_right .input_bainji:nth-child(3) input').val().length > 32 ){
+						alert('最大长度为32个字符');
+					}
+					else if ( $('.bianji_right .input_bainji:nth-child(3) input').val().length <= 0 ){
+						alert('请输入地址');
+					}
+				});
+//图片放大
+function picBig(imgSrc) {
+	console.log(imgSrc);
+    if(imgSrc == '') return;
+    else {
+        $('#divCenter').children('img').attr('src',imgSrc);
+        $('#divCenter').show();
+    }
+}
+function picClose() {
+    $('#divCenter').hide();
+}

@@ -1,0 +1,110 @@
+<?php
+/* Smarty version {Smarty::SMARTY_VERSION}, created on 2017-09-18 11:03:04
+  from "E:\lsxtest\backend\web\modules\category\category\index.tpl" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.32-dev-22',
+  'unifunc' => 'content_59bfa7e8c70498_77072739',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '1373c3281d15a5057817f327e2a9d42ec55465a8' => 
+    array (
+      0 => 'E:\\lsxtest\\backend\\web\\modules\\category\\category\\index.tpl',
+      1 => 1505723822,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_59bfa7e8c70498_77072739 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="/css/index.css" />
+	</head>
+	<body>
+		<div class="combox">
+			<!--所在位置显示-->
+			<div class="weizhixianshi">
+				<span>你的位置：</span><label>首页专题管理</ label>
+			</div>
+			<!--首页分类设置-->
+		 	 <div class="shagnjiachakan">
+		 		 <div class="chakntongji" style="border-bottom: none;width: 100%;">
+		 			<div class="shagnjiaqiben" style="margin-bottom: 20px;"><a href="<?php echo yii\helpers\Url::to(array('category/add'));?>
+" class="xinzen_dianpu" style="float: right;background: #1c93e6;">添加专题</a></div>
+		 			<table class="gongsuou" cellpadding="0" cellspacing="0" >
+						  <tr class="gong_nav">
+						  	  <td class="lefttalbe">专题名称</td>
+						  	  <td>图标</td> 
+						  	  <td>链接</td> 
+						  	  <td>排序</td>
+						  	  <td class="righttalble">操作</td> 
+						  </tr>
+						  <tbody>  
+                                                        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'val');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['val']->value) {
+?>
+						  	 <tr>
+						  	 	<td class="lunboicon"><?php echo $_smarty_tpl->tpl_vars['val']->value['category_name'];?>
+</td>
+						  	 	<td class="tubiao_icon">
+                                                                     <?php if ($_smarty_tpl->tpl_vars['val']->value['category_path']) {?>
+                                                                        <img src="<?php echo $_smarty_tpl->tpl_vars['val']->value['category_path'];?>
+"/>
+                                                                    <?php } else { ?>
+                                                                        <img src="/img/icon_tubiao_03.png"/>
+                                                                    <?php }?>
+                                                                </td> 
+						  	 	<td><?php echo $_smarty_tpl->tpl_vars['val']->value['category_url'];?>
+</td> 
+						  	 	<td><?php echo $_smarty_tpl->tpl_vars['val']->value['category_sort'];?>
+</td> 
+						  	 	<td class="taibcloor" style="cursor: pointer;">
+                                                                    <a href="<?php echo yii\helpers\Url::to(array('category/add'));?>
+?id=<?php echo $_smarty_tpl->tpl_vars['val']->value['category_id'];?>
+">编辑</a>
+                                                                    <a onClick="return confirm('确认要删除？')" href="<?php echo yii\helpers\Url::to(array('category/del'));?>
+?id=<?php echo $_smarty_tpl->tpl_vars['val']->value['category_id'];?>
+">删除</a>
+                                                                </td>
+                                                                
+						  	 </tr>  
+						  	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+ 
+						  </tbody> 
+					</table>
+					 <!--分页-->
+			 	    <div class="fenye">
+			 	    	<div class="fenye_conbox">
+			 	    		<div class="fenye_titile">
+			 	    			显示<span>1-10</span>条记录，共<span>548</span>条记录<label>　|　</label>
+			 	    			<a href="#">首页</a><a href="#">上一页</a><a href="#">下一页</a><a href="#">尾页</a>
+			 	    		    <input type="text" class="text" />
+			 	    		    <input type="submit" value="跳 转" class="tiaozhuan" />
+			 	    		</div>
+			 	    	</div>
+			 	    </div>
+		 		</div>  
+		 		
+		 	</div>
+		 	
+			
+		</div>
+	</body>
+</html>
+<?php }
+}

@@ -1,0 +1,137 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2017/9/12
+ * Time: 9:27
+ */
+namespace app\modules\user\controllers;
+
+use app\modules\user\models\UserDo;
+use common\models\Region;
+use yii\web\Controller;
+
+class UserController extends Controller{
+
+    public $layout = false;
+
+    public function __construct ($id, $module, $config = [])
+    {
+        $module = \Yii::$app->getModule('user');
+        parent::__construct($id, $module, $config);
+    }
+
+    public function actionList (){
+        $parent_code_one='';
+        $parent_code_two='';
+        $post=[
+          'user_name'=>'',
+          'mobile'=>'',
+          'user_status'=>'',
+          'create_time_start'=>'',
+          'create_time_end'=>'',
+            's_province'=>'',
+            's_city'=>'',
+            's_county'=>''
+        ];
+        if (\Yii::$app->request->isPost) {
+            $post =posts();
+            $post['region_code']=Region::city($post);
+            //二级下拉的城市信息
+            $region_code = Region::get_parent_code($post['s_city']);
+            //三级下拉的城市信息
+            $region_code_new = Region::get_parent_code($post['s_county']);
+            //取出2级父代码
+            if(empty($region_code))
+            {
+                $parent_code_one='';
+            }
+            else
+            {
+                $parent_code_one = $region_code[0]['parent_code'];//城市二级
+            }
+            if(empty($region_code_new))
+            {
+                $parent_code_two='';
+            }
+            else
+            {
+                $parent_code_two = $region_code_new[0]['parent_code'];//城市三级
+            }
+
+
+        }elseif (gets())
+        {
+            $post=gets('post');
+            $post['region_code']=Region::city($post);
+            //二级下拉的城市信息
+            $region_code = Region::get_parent_code($post['s_city']);
+
+            //三级下拉的城市信息
+            $region_code_new = Region::get_parent_code($post['s_county']);
+            if(empty($region_code))
+            {
+                $parent_code_one='';
+            }
+            else
+            {
+                $parent_code_one = $region_code[0]['parent_code'];//城市二级
+            }
+            if(empty($region_code_new))
+            {
+                $parent_code_two='';
+            }
+            else
+            {
+                $parent_code_two = $region_code_new[0]['parent_code'];//城市三级
+            }
+        }
+
+        $list=['region_name'=>'全部','region_code'=>''];
+        //1级必取
+        $level = Region::getlist('1');//城市一级
+
+
+        //取出所有二级城市
+        $parent_code_one = Region::get_parent_code($parent_code_one);
+        //取出所有三级城市
+        $parent_code_two = Region::get_parent_code($parent_code_two);
+
+        array_unshift($level,$list);
+        array_unshift($parent_code_one,$list);
+        array_unshift($parent_code_two,$list);
+//        echo '<pre/>';
+//        var_dump($level);die();
+        $city['level']=$level;
+        $city['parent_code_one']=$parent_code_one;
+        $city['parent_code_two']=$parent_code_two;
+        $fileter=UserDo::UserList($post);
+        $page=$fileter['page'];
+        $data=$fileter['data'];
+
+        return $this->render('list.tpl',array('city'=>$city,'post'=>$post,'page'=>$page,'data'=>$data));
+
+    }
+    public function actionInfo()
+    {
+        $id=gets('id');
+        $data=UserDo::UserInfo($id);
+        if(empty($data['birthday']))
+        {
+                 $data['age']=0;
+        }else
+            {
+                $data['age']=UserDo::birthday($data['birthday']);
+            }
+
+//        var_dump($data);die();
+        return $this->render('info.tpl',['data'=>$data]);
+    }
+    public function actionEdit()
+    {
+       $data=gets();
+       $res=UserDo::UserEdit($data);
+       return $this->redirect('/user/user/list');
+    }
+
+}

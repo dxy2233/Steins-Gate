@@ -1,0 +1,141 @@
+<?php
+namespace app\modules\account\controllers;
+
+use yii\web\Controller;
+use common\models\Region;
+use common\models\ShopAccount;
+use common\models\ShopRecord;
+use common\report\Cell;
+use common\report\ColReport;
+class AccountController extends Controller{
+
+    public $layout = false;
+    public $enableCsrfValidation=false;
+
+    public function __construct ($id, $module, $config = [])
+    {
+        $module = \Yii::$app->getModule('account');
+        parent::__construct($id, $module, $config);
+    }
+
+    public function actionIndex(){
+//        $cookie = \Yii::$app->request->cookies;
+//        $name=$cookie->getValue('admin_name');
+//        var_dump($name);die;
+        $region_code[0]['parent_code'] = '';
+        $region_code_new[0]['parent_code'] = '';
+        if (\Yii::$app->request->isPost) {
+            $post = \Yii::$app->request->post();
+            $region_code = Region::get_region_code($post['s_city']);
+            $region_code_new = Region::get_region_code($post['s_county']);
+            if($post['s_county']){
+                $post['region_code'] = $post['s_county'];
+            }elseif($post['s_city'] && $post['s_county'] ==''){
+                $post['region_code'] = $post['s_city'];
+            }elseif($post['s_province'] && $post['s_city'] == '' && $post['s_county'] ==''){
+                $post['region_code'] = $post['s_province'];
+            }
+            $list = ShopAccount::getlist($post);
+        }else{
+            $list = ShopAccount::getlist();
+            $post = array('add_time_begin'=>'','add_time_end'=>'','name'=>'','s_province'=>'','s_city'=>'','s_county'=>'');
+        }
+        $data = fenye($list['list']);
+        $level = Region::getlist('1');//城市一级
+        $parent_code_one = $region_code[0]['parent_code'] ? $region_code[0]['parent_code'] : '50';//城市二级
+        $parent_code_two = $region_code_new[0]['parent_code'] ? $region_code_new[0]['parent_code'] : '50,01';//城市三级
+        $parent_code_one = Region::get_parent_code($parent_code_one);
+        $parent_code_two = Region::get_parent_code($parent_code_two);
+        return $this->render('index.tpl',array('list'=>$list,'data'=>$data['data'],'page'=>$data['page'],'level'=>$level,'parent_code_one'=>$parent_code_one,'parent_code_two'=>$parent_code_two,'post'=>$post));
+
+    }
+    public function actionShenqingtixian(){
+        if (\Yii::$app->request->isPost) {
+            $post = \Yii::$app->request->post();
+            $data = ShopRecord::getlist($post);
+        }else{
+            $data = ShopRecord::getlist();
+            $post = array('add_time_begin'=>'','add_time_end'=>'','name'=>'','request_status'=>'');
+        }
+        return $this->render('shenqingtixian.tpl',array('data'=>$data,'post'=>$post));
+    }
+    public function actionRefuse(){
+        if(\Yii::$app->request->isPost) {
+            $post = \Yii::$app->request->post();
+            $list = ShopRecord::getone($post['request_id']);
+            $cookie = \Yii::$app->request->cookies;
+            $user_id = $cookie->getValue('user_id');
+            if($list['request_status'] == 0){
+                $post['request_status'] = 2;
+                $post['update_time'] = time();
+                $post['approve_id'] = $user_id ? $user_id : 1;
+                $result = ShopRecord::record_update($list['request_id'],$post);
+                if($result){
+                    return $this->goBack('shenqingtixian'); 
+                }
+            }else{
+                return $this->goBack('shenqingtixian');
+            }
+        }
+    }
+    public function actionAdopt(){
+        if(\Yii::$app->request->isGet) {
+            $get = \Yii::$app->request->get();
+            $list = ShopRecord::getone($get['request_id']);
+            if($list['request_status'] == 0){
+                $post['request_status'] = 1;
+                $post['update_time'] = time();
+                $post['approve_id'] = 1;
+                $post['content'] = '';
+                $result = ShopRecord::record_update($list['request_id'],$post);
+                if($result){
+                    return $this->goBack('shenqingtixian'); 
+                }
+            }else{
+                return $this->goBack('shenqingtixian');
+            }
+        }
+    }
+    public function actionExport ()
+	{
+            if (\Yii::$app->request->isPost) {
+                $post = \Yii::$app->request->post();
+                if($post['s_county']){
+                    $post['region_code'] = $post['s_county'];
+                }elseif($post['s_city'] && $post['s_county'] ==''){
+                    $post['region_code'] = $post['s_city'];
+                }elseif($post['s_province'] && $post['s_city'] == '' && $post['s_county'] ==''){
+                    $post['region_code'] = $post['s_province'];
+                }
+                $filter = ShopAccount::getlist($post);
+            }
+		$cols = [];
+		
+		$cols[] = Cell::create('shop_name', '商家名称', 0);
+		$cols[] = Cell::create('region_name', '地区', 0);
+		$cols[] = Cell::create('banquet_orders', '席单总数', 0);
+		$cols[] = Cell::create('sales_amount', '销售总额（元）', 0);
+		$cols[] = Cell::create('total_balnce', '账户余额', 0);
+		$cols[] = Cell::create('withdraw_amount', '已提现总额', 0);
+		$cols[] = Cell::create('platform_amount', '平台佣金', 0);
+                $cols[] = Cell::create('commission_rate', '当前分佣比例（%）', 0);
+		$report = new ColReport($cols);
+		$i = 0;
+		foreach($filter['list'] as $item)
+		{
+			$report->setCellValue(Cell::toId($i + 1, 'shop_name'), $item['shop_name']);
+			$report->setCellValue(Cell::toId($i + 1, 'region_name'), $item['region_name']);
+			$report->setCellValue(Cell::toId($i + 1, 'banquet_orders'), $item['banquet_orders']);
+			$report->setCellValue(Cell::toId($i + 1, 'sales_amount'), $item['sales_amount']);
+			$report->setCellValue(Cell::toId($i + 1, 'total_balnce'), $item['total_balnce']);
+			$report->setCellValue(Cell::toId($i + 1, 'withdraw_amount'), $item['withdraw_amount']);
+			$report->setCellValue(Cell::toId($i + 1, 'platform_amount'), $item['platform_amount']);
+			$report->setCellValue(Cell::toId($i + 1, 'commission_rate'), $item['commission_rate']);
+			$i++;
+		}
+		
+		$report->setTitle('财务管理统计');
+		
+		$report->toExcel(true);
+	}
+}

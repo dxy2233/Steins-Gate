@@ -1,0 +1,97 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2017/9/15
+ * Time: 9:00
+ */
+namespace app\modules\category\controllers;
+
+use yii\web\Controller;
+use common\models\Category;
+use common\web\Upload;
+
+class CategoryController extends Controller{
+
+    public $layout = false;
+
+    public function __construct ($id, $module, $config = [])
+    {
+        $module = \Yii::$app->getModule('category');
+        parent::__construct($id, $module, $config);
+    }
+
+    public function actionIndex()
+    {
+        $list = Category::getAllpage();
+        $page=$list['page'];
+        $data=$list['data'];
+        return $this->render('index.tpl',array('data'=>$data,'page'=>$page));
+
+    }
+
+    public function actionAdd()
+    {
+        if(\Yii::$app->request->isPost){
+            $data = \Yii::$app->request->post();
+            $model = new Category();
+            //上传文件
+            $img = '';
+            if($_FILES['category_path']['size']){
+                $img = Upload::UploadPhoto($model,'uploads/category/','category_path');
+                $img = str_replace('uploads/','',$img);
+            }
+            if(empty($data['category_id'])){
+                //添加专题
+                $model->category_name = $data['category_name'];
+                $model->category_url = $data['category_url'];
+                $model->category_path = $img;
+                $model->category_sort = $data['category_sort'];
+                $result = $model->insert(false);
+            }else{
+                $list = Category::getlist($data['category_id']);
+                if(empty($list)){
+                    return $this->goBack('index');
+                }
+                $data['category_path'] = $img ? $img : $list['category_path'];
+                //修改专题
+                $result = Category::Category_update($data['category_id'],$data);
+            }
+            return $this->goBack('index');
+        }
+        if(\Yii::$app->request->isGet){
+            $list = \Yii::$app->request->get();
+            if($list){
+                $data['data'] = Category::getlist($list['id']);
+                if(empty($data['data'])){
+                    throw new UserException('专题不存在！');
+                }
+                return $this->render('add.tpl',$data);
+            }
+        }
+        $data['data'] = array(
+            'category_name'=>'',
+            'category_path'=>'',
+            'category_url'=>'',
+            'category_sort'=>'',
+            'category_id'=>'',
+        );
+        return $this->render('add.tpl',$data);
+    }
+    
+    public function actionDel(){
+        if(\Yii::$app->request->isGet){
+            $list = \Yii::$app->request->get();
+            if($list['id']){
+                $id = Category::getlist($list['id']);
+                if(empty($id)){
+                    return $this->goBack('index');
+                }
+                $carousel = Category::Category_delete($list['id']);
+                if($carousel){
+                     return $this->goBack('index');
+                }
+            }
+       }
+    }
+}

@@ -1,0 +1,66 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2017/9/12
+ * Time: 9:27
+ */
+namespace app\modules\banquetclass\controllers;
+
+use yii\web\Controller;
+use common\models\BanquetType;
+use common\web\Upload;
+use yii\data\Pagination;
+use yii\widgets\LinkPager;
+class BanquetclassController extends Controller{
+
+    public $layout = false;
+
+    public function __construct ($id, $module, $config = [])
+    {
+        $module = \Yii::$app->getModule('banquetclass');
+        parent::__construct($id, $module, $config);
+    }
+
+    public function actionIndex (){
+        $data = BanquetType::getAllCategory();
+        foreach($data as $key=>$val){
+            $data[$key]['type_path'] = $val['type_path'] ? imageurl($val['type_path']) : '';
+        }
+
+        $list = fenye($data);
+        return $this->render('index.tpl',array('data'=>$list['data'],'page'=>$list['page']));
+
+    }
+    public function actionBanquetadd(){
+        $model = new BanquetType();
+        if (\Yii::$app->request->isPost) {
+            $post = \Yii::$app->request->post();
+            //上传文件
+            $img = '';
+            if($_FILES['type_path']['size']){
+                $img = Upload::UploadPhoto($model,'uploads/banquet/','type_path');
+                $img = str_replace('uploads/','',$img);
+            }
+            if(empty($post['type_id'])){
+                $model->type_name = $post['type_name'];
+                $model->type_sort = $post['type_sort'] ? $post['type_sort'] : 255;
+                $model->type_path = $img;
+                $model->type_url = $post['type_url'];
+                $result = $model->insert(false);
+                if($result){
+                    return $this->goBack('index');
+                }
+            }else{
+                $list = BanquetType::getone($post['type_id']);
+                if(empty($list)){
+                    return $this->goBack('index');
+                }
+                $post['type_path'] = $img ? $img : $list['type_path'];
+                $result = BanquetType::banquet_update($post['type_id'],$post);
+                return $this->goBack('index');
+            }
+        }
+
+    }
+}
