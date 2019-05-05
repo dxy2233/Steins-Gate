@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+const arr = [
+  {
+    id: 'a',
+    children: [
+      {
+        id: 1,
+        children: null
+      },
+      {
+        id: 2,
+        children: [
+          {
+            id: 'xxx',
+            children: null
+          }
+        ]
+      },
+      {
+        id: 3,
+        children: [
+          {
+            id: 'yyy',
+            children: null
+          }
+        ]
+      },
+      {
+        id: 4,
+        children: null
+      }
+    ]
+  },
+  {
+    id: 'b',
+    children: null
+  }
+]
+function find(arr, tag) {
+  let res = []
+  !function deep(arr, tag, name) {
+    for (const item of arr) {
+      let names = name.concat([item.id])
+      if (item.id === tag) {
+        res = names
+        break
+      }
+      if (item.children !== null) deep(item.children, tag, names)
+    }
+  }(arr, tag, [])
+  return res
+}
+console.log(
+  find(arr, 3)
+)
+</script>
+</html>
