@@ -12,7 +12,7 @@ superagent
 .get('https://m.fang.com/house/ec/customer/_AjaxCustomerList')
 .query({
   NewCode: 3110122580,
-  PageSize: 50,
+  PageSize: 10,
   PageIndex: 1,
   CallStatus: '',
   CustomerNameOrPhone: '',
@@ -21,12 +21,13 @@ superagent
   CreateTimeTo: '结束时间'
 })
 .set('cookie', cook)
-.then(res => {
+.then(async res => {
     let $ = cheerio.load(res.text)
     let arrayData = [
-      ['用户编号', '账户', '手机号', '置业顾问', '通话状态', '客户产生时间', '客户来源', '音频地址', '通话时间', '通话时长',  '跟进记录', '意向', '通话记录']
+      ['用户编号', '购房者姓名', '购房者手机号', '置业顾问', '通话状态', '客户产生时间', '客户来源', '音频地址', '通话时间', '通话时长',  '跟进记录', '意向', '通话记录']
     ]
 
+    // 获取主列表
     $('#dateListTable tbody tr').each((i, elem) => {
       let temp = [
         $(elem).children().eq(1).text(),
@@ -35,38 +36,41 @@ superagent
         $(elem).children().eq(4).text(),
         $(elem).children().eq(5).text(),
         $(elem).children().eq(6).text(),
-        $(elem).children().eq(7).text()
+        $(elem).children().eq(7).text(),
+        $(elem).children().eq(8).children().attr('href') // 音频地址
       ]
-      superagent
-        .get('https://m.fang.com/house/ec/customer/' + $(elem).children().eq(8).children().attr('href'))
-        .set('cookie', cook)
-        .then(res2 => {
-          let $ = cheerio.load(res2.text)
-          if (!$('.table tbody tr').text()) arrayData.push(temp)
-          else {
-            $('.table tbody tr').each((i, elem) => {
-              temp.push($(elem).children().eq(5).children().eq(0).attr('url'))
-              temp.push($(elem).children().eq(0).text())
-              temp.push($(elem).children().eq(2).text())
-              arrayData.push(temp)
-            })
-          }
-        }).catch(err => {
-          console.log(err)
-        })
+      arrayData.push(temp)
     })
 
-    setTimeout(() => {
-      let arrayWorkSheet = XLSX.utils.aoa_to_sheet(arrayData)
-      let cc = {
-        SheetNames: ['arrayWorkSheet'],
-        Sheets: {
-          'arrayWorkSheet': arrayWorkSheet
-        }
-      }
-      XLSX.writeFile(cc, './cc.xlsx')
-    }, 10000)
+    // 音频详情页
+    for (let i = 1; i < arrayData.length; i++) {
+      await superagent
+        .get('https://m.fang.com/house/ec/customer/' + arrayData[i][7])
+        .set('cookie', cook)
+        .then(res => {
+          let $ = cheerio.load(res.text)
+          // 未接么有数据
+          if ($('.table tbody').find('tr').length === 0) arrayData[i].splice(7, 1)
+          // 接听后有数据
+          else {
+            $('.table tbody tr').each((k, elem) => {
+              arrayData[i].splice(7, 1)
+              arrayData[i].push($(elem).children().eq(5).children().eq(0).attr('url'))
+              arrayData[i].push($(elem).children().eq(0).text())
+              arrayData[i].push($(elem).children().eq(2).text())
+            })
+          }
+        })
+    }
 
+    let arrayWorkSheet = XLSX.utils.aoa_to_sheet(arrayData)
+    let cc = {
+      SheetNames: ['arrayWorkSheet'],
+      Sheets: {
+        'arrayWorkSheet': arrayWorkSheet
+      }
+    }
+    XLSX.writeFile(cc, './cc.xlsx')
   }).catch(err => {
     console.log(err);
   })
