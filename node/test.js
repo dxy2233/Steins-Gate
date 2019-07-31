@@ -37,32 +37,38 @@ superagent
         $(elem).children().eq(5).text(),
         $(elem).children().eq(6).text(),
         $(elem).children().eq(7).text(),
-        $(elem).children().eq(8).children().attr('href') // 音频地址
+        `=HYPERLINK("https://m.fang.com/house/ec/customer/${$(elem).children().eq(8).children().attr('href')}", "链接")`
       ]
       arrayData.push(temp)
     })
 
     // 音频详情页
-    for (let i = 1; i < arrayData.length; i++) {
-      await superagent
-        .get('https://m.fang.com/house/ec/customer/' + arrayData[i][7])
-        .set('cookie', cook)
-        .then(res => {
-          let $ = cheerio.load(res.text)
-          // 未接么有数据
-          if ($('.table tbody').find('tr').length === 0) arrayData[i].splice(7, 1)
-          // 接听后有数据
-          else {
-            $('.table tbody tr').each((k, elem) => {
-              arrayData[i].splice(7, 1)
-              arrayData[i].push($(elem).children().eq(5).children().eq(0).attr('url'))
-              arrayData[i].push($(elem).children().eq(0).text())
-              arrayData[i].push($(elem).children().eq(2).text())
-            })
-          }
-        })
-    }
+    // for (let i = 1; i < arrayData.length; i++) {
+    //   await superagent
+    //     .get('https://m.fang.com/house/ec/customer/' + arrayData[i][7])
+    //     .set('cookie', cook)
+    //     .then(res => {
+    //       let $ = cheerio.load(res.text)
+    //       // 未接么有数据
+    //       if ($('.table tbody').find('tr').length === 0) arrayData[i].splice(7, 1)
+    //       // 接听后有数据
+    //       else {
+    //         $('.table tbody tr').each((k, elem) => {
+    //           arrayData[i].splice(7, 1)
+    //           arrayData[i].push($(elem).children().eq(5).children().eq(0).attr('url'))
+    //           arrayData[i].push($(elem).children().eq(0).text())
+    //           arrayData[i].push($(elem).children().eq(2).text())
+    //         })
+    //         let remake = ''
+    //         $('.tab-content .new-timeline ul li').each((j, elem) => {
+    //           remake = remake + $(elem).children().eq(2).text()
+    //         })
+    //         arrayData[i].push(remake)
+    //       }
+    //     })
+    // }
 
+    // 输出excel
     let arrayWorkSheet = XLSX.utils.aoa_to_sheet(arrayData)
     let cc = {
       SheetNames: ['arrayWorkSheet'],
