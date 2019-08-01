@@ -24,7 +24,7 @@ superagent
 .then(async res => {
     let $ = cheerio.load(res.text)
     let arrayData = [
-      ['用户编号', '购房者姓名', '购房者手机号', '置业顾问', '通话状态', '客户产生时间', '客户来源', '音频地址', '通话时间', '通话时长',  '跟进记录', '意向', '通话记录']
+      ['用户编号', '购房者姓名', '购房者手机号', '置业顾问', '通话状态', '客户产生时间', '客户来源', '操作', '音频地址', '通话时间', '通话时长',  '跟进记录', '意向', '通话记录']
     ]
 
     // 获取主列表
@@ -37,36 +37,51 @@ superagent
         $(elem).children().eq(5).text(),
         $(elem).children().eq(6).text(),
         $(elem).children().eq(7).text(),
-        `=HYPERLINK("https://m.fang.com/house/ec/customer/${$(elem).children().eq(8).children().attr('href')}", "链接")`
+        { v: '查看', 
+          l: { 
+            Target: 'https://m.fang.com/house/ec/customer/' + $(elem).children().eq(8).children().attr('href'),
+            Tooltip: 'https://m.fang.com/house/ec/customer/' + $(elem).children().eq(8).children().attr('href')
+          }
+        },
+        $(elem).children().eq(8).children().attr('href')
       ]
       arrayData.push(temp)
     })
 
     // 音频详情页
-    // for (let i = 1; i < arrayData.length; i++) {
-    //   await superagent
-    //     .get('https://m.fang.com/house/ec/customer/' + arrayData[i][7])
-    //     .set('cookie', cook)
-    //     .then(res => {
-    //       let $ = cheerio.load(res.text)
-    //       // 未接么有数据
-    //       if ($('.table tbody').find('tr').length === 0) arrayData[i].splice(7, 1)
-    //       // 接听后有数据
-    //       else {
-    //         $('.table tbody tr').each((k, elem) => {
-    //           arrayData[i].splice(7, 1)
-    //           arrayData[i].push($(elem).children().eq(5).children().eq(0).attr('url'))
-    //           arrayData[i].push($(elem).children().eq(0).text())
-    //           arrayData[i].push($(elem).children().eq(2).text())
-    //         })
-    //         let remake = ''
-    //         $('.tab-content .new-timeline ul li').each((j, elem) => {
-    //           remake = remake + $(elem).children().eq(2).text()
-    //         })
-    //         arrayData[i].push(remake)
-    //       }
-    //     })
-    // }
+    for (let i = 1; i < arrayData.length; i++) {
+      // 未接么有数据
+      if (arrayData[i][4] === '未呼' || arrayData[i][4] === '已呼未接通') {
+        arrayData[i].splice(8, 1)
+        continue
+      }
+      // 接听后有数据
+      await superagent
+        .get('https://m.fang.com/house/ec/customer/' + arrayData[i][8])
+        .set('cookie', cook)
+        .then(res => {
+          let $ = cheerio.load(res.text)
+          $('.table tbody tr').each((k, elem) => {
+            arrayData[i].splice(8, 1)
+            arrayData[i].push(
+              {
+                v: '链接',
+                l: {
+                  Target: $(elem).children().eq(5).children().eq(0).attr('url'),
+                  Tooltip: $(elem).children().eq(5).children().eq(0).attr('url')
+                }
+              }
+            )
+            arrayData[i].push($(elem).children().eq(0).text())
+            arrayData[i].push($(elem).children().eq(2).text())
+          })
+          let remake = ''
+          $('.tab-content .new-timeline ul li').each((j, elem) => {
+            remake = remake + $(elem).children().eq(2).text()
+          })
+          arrayData[i].push(remake)
+        })
+    }
 
     // 输出excel
     let arrayWorkSheet = XLSX.utils.aoa_to_sheet(arrayData)
