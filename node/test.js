@@ -105,8 +105,19 @@ superagent
 
 const getExcel = () => {
   let workbook = XLSX.readFile('./cc.xlsx')
-  console.log(workbook)
-  // workbook = XLSX.utils.sheet_to_json(workbook)
+  let data = workbook.Sheets.arrayWorkSheet
+  let asd = [
+    ['用户asdasdsda编号', 'asdsad']
+  ]
+  XLSX.utils.sheet_add_aoa(data, asd)
+  console.log(data);
+  let cc = {
+    SheetNames: ['arrayWorkSheet'],
+    Sheets: {
+      'arrayWorkSheet': data
+    }
+  }
+  XLSX.writeFile(cc, './cccc.xlsx')
 }
 
 // getTable()
