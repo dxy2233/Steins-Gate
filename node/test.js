@@ -8,17 +8,17 @@ const fs = require("fs")
 const voice = require('./voice')
 const excel = require('./excel')
 const MongoClient = require('mongodb').MongoClient
-const dburl = 'mongodb://localhost:27017/fang'
 
-// MongoClient.connect(dburl, { useNewUrlParser: true }, function (err, db) {
-//   if (err) throw err
-//   const lingshanjun = db.db('lingshanjun')
-//   lingshanjun.collection('test').find({}, {projection: {_id:0}}).toArray(function (err, result) {
-//     if (err) throw err
-//     console.log(result[0])
-//     db.close()
-//   })
-// })
+const dburl = 'mongodb://localhost:27017/fang'
+MongoClient.connect(dburl, { useNewUrlParser: true }, function (err, db) {
+  if (err) throw err
+  const lingshanjun = db.db('lingshanjun')
+  lingshanjun.collection('test').find({}, {projection: {_id:0}}).toArray(function (err, result) {
+    if (err) throw err
+    console.log(result[0])
+    db.close()
+  })
+})
 
 const code = 3110122580
 const cook ='global_cookie=ds7jcrh8va0pmwoji6yy4c6zw1gju13qzge; newhouse_user_guid=DD60A92F-13EF-BE67-E53A-FA6B941A06A5; vh_newhouse=1_1554289355_1010%5B%3A%7C%40%7C%3A%5D953cf1adb4deabbf8e0f358b09238859; Integrateactivity=notincludemc; lastscanpage=1; _sf_group_flag=xf; new_search_uid=ec665c5ecf71bf30320b9afc2aeeabe6; city=cq; newhouse_chat_guid=7E064831-319E-8B77-32DE-51761A28E999; Captcha=484D4F4855783766525663772F684F454E2F4F46336A474D346B51663961594E443636453035383668686F424A4B4F6E7669354C58594C754775666D71796370434D6370353539726633733D; __utma=147393320.996047671.1556542547.1563799566.1564407521.17; __utmc=147393320; __utmz=147393320.1564407521.17.14.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; unique_cookie=U_lddoxvvc5s9ldomzfwbhcucy71zjyofu9ps*1; route=4b4f06a73088080a32aa3eda08d524b8; sfut=347731973629C3497FB08F4C916CFB1BDC1189679A11D16DA66EEA7A9B66598A3297BC266718E66769403C4058736811CA75BC4FEE7564B377CABCE6126FC723467B3DEC0A488717364B3A99E20B8022FA117969E262C1D6F5863C238736A056; sfyt=2D9-olGHEtawNH-E-P93cJrrrJZnU3RJ1XwSse5YZN_YDxkF9zJrbvYFH6dhSzFQF2GHRe01aggWMzXs0THd2w==; unique_cookie=U_lddoxvvc5s9ldomzfwbhcucy71zjyofu9ps*2; sourcepage=wszx_gwgl_kfypc%7Cb_bmgl%5Elb_kfypc'
@@ -63,23 +63,6 @@ superagent
     // 获取主列表
     $('#dateListTable tbody tr').each((i, elem) => {
       let now = new Date()
-      // let temp = [
-      //   $(elem).children().eq(1).text(),
-      //   $(elem).children().eq(2).text(),
-      //   $(elem).children().eq(3).text(),
-      //   $(elem).children().eq(4).text(),
-      //   $(elem).children().eq(5).text(),
-      //   $(elem).children().eq(6).text(),
-      //   $(elem).children().eq(7).text(),
-      //   { v: '查看', 
-      //     l: { 
-      //       Target: 'https://m.fang.com/house/ec/customer/' + $(elem).children().eq(8).children().attr('href'),
-      //       Tooltip: 'https://m.fang.com/house/ec/customer/' + $(elem).children().eq(8).children().attr('href')
-      //     }
-      //   },
-      //   $(elem).children().eq(8).children().attr('href'),
-      //   now.getMonth() + 1 + '/' + now.getDate()
-      // ]
       let temp = {
         id: $(elem).children().eq(1).text(),
         name: $(elem).children().eq(2).text(),
@@ -98,42 +81,32 @@ superagent
       }
       resArray.push(temp)
     })
-    console.log(resArray)
     // 音频详情页
-    // for (let i = 1; i < arrayData.length; i++) {
-    //   // 未接么有数据
-    //   if (arrayData[i][4] === '未呼' || arrayData[i][4] === '已呼未接通') {
-    //     arrayData[i].splice(8, 1)
-    //     continue
-    //   }
-    //   // 接听后有数据
-    //   await superagent
-    //     .get('https://m.fang.com/house/ec/customer/' + arrayData[i][8])
-    //     .set('cookie', cook)
-    //     .then(res => {
-    //       let $ = cheerio.load(res.text)
-    //       arrayData[i].splice(8, 1) // 删除详情页地址
-    //       let url = {} // mp3地址
-    //       let duration = [] // 通话时长
-    //       $('.table tbody tr').each((k, elem) => {
-    //         url = { ...url,
-    //           v: '链接',
-    //           l: {
-    //             Target: $(elem).children().eq(5).children().eq(0).attr('url'),
-    //             Tooltip: $(elem).children().eq(5).children().eq(0).attr('url')
-    //           }
-    //         }
-    //         duration.push($(elem).children().eq(2).text())
-    //       })
-    //       arrayData[i].push(url)
-    //       arrayData[i].push(duration.join())
-    //       let remake = '' // 跟进记录
-    //       $('.tab-content .new-timeline ul li').each((j, elem) => {
-    //         remake = remake + $(elem).children().eq(2).text()
-    //       })
-    //       arrayData[i].push(remake)
-    //     })
-    // }
+    for (let i = 1; i < resArray.length; i++) {
+      // 未接么有数据
+      if (resArray[i]['callStatus'] === '未呼' || resArray[i]['callStatus'] === '已呼未接通') continue
+      // 接听后有数据
+      await superagent
+        .get('https://m.fang.com/house/ec/customer/' + resArray[i]['operateUrl'])
+        .set('cookie', cook)
+        .then(res => {
+          let $ = cheerio.load(res.text)
+          let url = [] // mp3地址
+          let duration = [] // 通话时长
+          $('.table tbody tr').each((k, elem) => {
+            url.push($(elem).children().eq(5).children().eq(0).attr('url'))
+            duration.push($(elem).children().eq(2).text())
+          })
+          resArray[i].audioUrl = url
+          resArray[i].callTime = duration
+          let remake = '' // 跟进记录
+          $('.tab-content .new-timeline ul li').each((j, elem) => {
+            remake = remake + $(elem).children().eq(2).text()
+          })
+          resArray[i].log = remake
+        })
+    }
+    console.log(resArray)
   }).catch(err => {
     console.log(err);
   })  
@@ -239,6 +212,6 @@ const getExcel = () => {
   XLSX.writeFile(cc, './cccc.xlsx')
 }
 
-getData()
+// getData()
 // getTable()
 // getExcel()
