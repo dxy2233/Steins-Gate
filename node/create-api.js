@@ -11,7 +11,16 @@ const getData = async () => {
 await superagent
   .get('http://192.168.0.108:8084/v2/api-docs')
   .then(res => {
-    baseText = JSON.parse(res.text)
+    baseText = JSON.parse(res.text) // tags:大标题  paths:路径基本信息  definitions:类的详细信息
+    // 组装排列数据
+    for (const i in baseText.paths) {
+      let res = {}
+      if (baseText.paths[i].get) res = { ...baseText.paths[i].get, url:i, method: 'get' }
+      else res = { ...baseText.paths[i].post, url:i, method: 'post' }
+      const searchIndex = baseText.tags.findIndex(item => item.name === res.tags[0])
+      if (!baseText.tags[searchIndex].content) baseText.tags[searchIndex].content = []
+      baseText.tags[searchIndex].content.push(res)
+    }
   })
 }
 
@@ -23,18 +32,52 @@ const create = async () => {
     name[0] = name[0].toLowerCase()
     name = name.join('').replace()
     // 写入文件
-    // fs.access(apiPath + 'Login.js', fs.constants.F_OK, err => {
-    //  let has = err ? false : true
-    //  if (has) {
-    //    console.log('存在')
-    //  } else {
-    //    console.log('不存在')
-    //  }
-    // })
-    fs.writeFile(`../${name}.js`, 'test', err => {
-      console.log(err)
-    })
+    fs.writeFile(`${apiPath}${name}.js`, textTemplate(item.content), err => { if (err) console.log(err) })
   })
+}
+
+// 文件模板
+const textTemplate = data => {
+  let res = 
+`import request from '@/utils/request'
+`
+data.forEach(item => {
+  let apiName = item.url.slice(item.url.lastIndexOf('/') + 1) // 接口名称
+  let parameter = '' // 参数
+  let variable = '' // 传参变量
+  if (item.parameters && item.method === 'get') {
+    parameter = item.parameters.map(ele => ele.name).join(', ')
+    variable = `params: { ${parameter} }`
+  }
+  if (item.parameters && item.method === 'post') {
+    parameter = 'data'
+    variable = 'data'
+  }
+  // post方法寻找ob注释
+  let label = ''
+  if (item.parameters && item.method === 'post' && item.consumes[0] === 'application/json') {
+    if (!item.parameters[0].schema) return
+    let address = item.parameters[0].schema.$ref ? item.parameters[0].schema.$ref : item.parameters[0].schema.items.$ref
+    address = address.slice(address.lastIndexOf('/') + 1)
+    for (const i in baseText.definitions[address].properties) {
+label = `${label}
+// ${i}: ${baseText.definitions[address].properties[i].description}`
+    }
+  }
+  // 输出模板函数
+  res =
+`${res}
+// ${item.summary}${label ? `${label}` : ''}
+export function ${apiName} (${parameter}) {
+  return request({
+    url: '${item.url}',
+    method: '${item.method}'${parameter ? `,
+    ${variable}` : ''}
+  })
+}
+`
+})
+  return res
 }
 
 // 运行
