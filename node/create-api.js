@@ -61,7 +61,7 @@ data.forEach(item => {
     address = address.slice(address.lastIndexOf('/') + 1)
     for (const i in baseText.definitions[address].properties) {
 label = `${label}
-// ${i}: ${baseText.definitions[address].properties[i].description}`
+// ${i}: ${baseText.definitions[address].properties[i].description}`.trim()
     }
   }
   // 输出模板函数
