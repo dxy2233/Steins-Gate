@@ -60,14 +60,16 @@ data.forEach(item => {
     let address = item.parameters[0].schema.$ref ? item.parameters[0].schema.$ref : item.parameters[0].schema.items.$ref
     address = address.slice(address.lastIndexOf('/') + 1)
     for (const i in baseText.definitions[address].properties) {
-label = `${label}
-// ${i}: ${baseText.definitions[address].properties[i].description}`.trim()
+    label = `${label}
+ * @param ${i} ${baseText.definitions[address].properties[i].description.trim()}`
     }
   }
   // 输出模板函数
   res =
 `${res}
-// ${item.summary}${label ? `${label}` : ''}
+/**
+ * @description ${item.summary}${label ? `${label}` : ''}
+ */
 export function ${apiName} (${parameter}) {
   return request({
     url: '${item.url}',
