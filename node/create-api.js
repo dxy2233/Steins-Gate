@@ -53,6 +53,7 @@ data.forEach(item => {
     parameter = 'data'
     variable = 'data'
   }
+  
   // post方法寻找ob注释
   let label = ''
   if (item.parameters && item.method === 'post' && item.consumes[0] === 'application/json') {
@@ -64,6 +65,7 @@ data.forEach(item => {
  * @param ${i} ${baseText.definitions[address].properties[i].description.trim()}`
     }
   }
+
   // 输出模板函数
   res =
 `${res}
@@ -73,7 +75,8 @@ data.forEach(item => {
 export function ${apiName} (${parameter}) {
   return request({
     url: '${item.url}',
-    method: '${item.method}'${parameter ? `,
+    method: '${item.method}'${item.url.indexOf('download')!==-1 ? `,
+    responseType: 'blob'` : ''}${parameter ? `,
     ${variable}` : ''}
   })
 }
