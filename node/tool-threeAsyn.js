@@ -19,7 +19,9 @@ shell.exec('npm run build', () => {
   shell.echo('打包完毕')
   shell.cd('..')
   shell.echo('提交svn目录：' + path.resolve('./'))
+  // svn更新
   shell.exec('svn update')
+  // 无冲突键入commit后提交
   if (shell.exec('svn status|grep ^C').length === 0) {
     shell.echo('无冲突')
     const rl = readline.createInterface({
@@ -29,7 +31,9 @@ shell.exec('npm run build', () => {
     })
     rl.prompt()
     rl.on('line', line => {
-      shell.exec(`svn commit -m ${line}`, () => process.exit(0))
+      shell.exec('svn add * --force', () => {
+        shell.exec(`svn commit -m ${line}`, () => process.exit(0))
+      })
     })
   } else {
     shell.echo('有冲突!!!')
