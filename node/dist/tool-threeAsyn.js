@@ -1,26 +1,22 @@
-import * as shell from 'shelljs'
-import * as path from 'path'
-import * as fs from 'fs'
-import * as readline from 'readline'
-
-const dir1 = 'd:/october/' // 工作地址
-const dir2 = 'd:/com.better.synchro/src/main/resources/code' // svn地址
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs = require("fs");
+const dir1 = 'd:/october/'; // 工作地址
+const dir2 = 'd:/com.better.synchro/src/main/resources/code'; // svn地址
 let cp = {
-  testAdress: (adress1: string = dir1, adress2: string = dir2) => {
-    try {
-      fs.accessSync(adress1, fs.constants.R_OK | fs.constants.W_OK)
-      fs.accessSync(adress2, fs.constants.R_OK | fs.constants.W_OK)
-      return true
-    } catch (error) {
-      console.log('地址不正确')
-      return false
+    testAdress: (adress1 = dir1, adress2 = dir2) => {
+        try {
+            fs.accessSync(adress1, fs.constants.R_OK | fs.constants.W_OK);
+            fs.accessSync(adress2, fs.constants.R_OK | fs.constants.W_OK);
+            return true;
+        }
+        catch (error) {
+            console.log('地址不正确');
+            return false;
+        }
     }
-  }
-}
-
-console.log(cp.testAdress())
-
+};
+console.log(cp.testAdress());
 // // 拷贝文件
 // shell.cd('d:/october/')
 // shell.echo('源文件目录：' + path.resolve('./'))
@@ -30,7 +26,6 @@ console.log(cp.testAdress())
 //   shell.cp('-r', item, 'd:/com.better.synchro/src/main/resources/code')
 // })
 // shell.echo('拷贝结束')
-
 // // 打包&&提交svn
 // shell.cd('d:/com.better.synchro/src/main/resources/code')
 // shell.echo('打包目录：' + path.resolve('./'))
@@ -58,3 +53,4 @@ console.log(cp.testAdress())
 //     shell.echo('有冲突!!!')
 //   }
 // })
+//# sourceMappingURL=tool-threeAsyn.js.map
