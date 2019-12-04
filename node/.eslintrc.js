@@ -6,7 +6,7 @@ module.exports = {
     // 它们预定义了不同环境的全局变量，比如：
     //
     // browser: true,
-    // node: true
+    node: true
     // mocha: true,
     // jest: true,
     // jquery: true
