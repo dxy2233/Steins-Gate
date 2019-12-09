@@ -1,5 +1,5 @@
-var fs = require("fs")
-var cats = [
+let fs = require('fs')
+let cats = [
   {
     name: ['one'],
     child: [
@@ -38,4 +38,6 @@ const cc = `<style>
   }
 </style>
 `
-fs.writeFile('index.vue', cc, function (err) { if (err) console.log(err)  })
+fs.writeFile('index.vue', cc, function(err) {
+  if (err) console.log(err)
+})
