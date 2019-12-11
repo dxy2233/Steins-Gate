@@ -4,22 +4,35 @@ import * as fs from 'fs'
 import * as readline from 'readline'
 import * as nodemailer from 'nodemailer'
 
-const dir1 = 'e:/com.better.synchro1/code' // svn地址
+const dir1 = 'd:/october/' // 工作地址
+const dir2 = 'd:/three-province/code' // svn地址
 
 let cp = {
   // 验证路径
-  testAdress: (adress1: string = dir1) => {
+  testAdress: (adress1: string = dir1, adress2: string = dir2) => {
     try {
       fs.accessSync(adress1, fs.constants.R_OK | fs.constants.W_OK)
+      fs.accessSync(adress2, fs.constants.R_OK | fs.constants.W_OK)
       return true
     } catch (error) {
       console.log('地址不正确')
       return false
     }
   },
-  // 打包&&提交svn
-  uploadSvn: (adress1: string = dir1) => {
+  // 拷贝文件
+  dir1ToDir2: (adress1: string = dir1, adress2: string = dir2) => {
     shell.cd(adress1)
+    shell.echo('源文件目录：' + path.resolve('./'))
+    shell.echo('开始拷贝')
+    shell.ls('-A').forEach(item => {
+      if (item === '.git' || item === 'node_modules') return
+      shell.cp('-r', item, adress2)
+    })
+    shell.echo('拷贝结束')
+  },
+  // 打包&&提交svn
+  uploadSvn: (adress1: string = dir1, adress2: string = dir2) => {
+    shell.cd(adress2)
     shell.echo('打包目录：' + path.resolve('./'))
     shell.exec('npm run build', () => {
       shell.echo('打包完毕')
@@ -74,6 +87,7 @@ let cp = {
   },
   run: () => {
     if (!cp.testAdress()) return
+    cp.dir1ToDir2()
     cp.uploadSvn()
   }
 }
