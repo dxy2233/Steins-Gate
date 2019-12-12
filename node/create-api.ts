@@ -16,8 +16,18 @@ const getData = async () => {
     for (const i in baseText.paths) {
       if (baseText.paths.hasOwnProperty(i)) {
         let res: any = {}
-        if (baseText.paths[i].get)
+        // 组装get方法
+        if (baseText.paths[i].get) {
           res = { ...baseText.paths[i].get, url: i, method: 'get' }
+          // get请求固定参数顺序
+          let temOrder = getOrder[res.url.slice(res.url.lastIndexOf('/') + 1)]
+          if (temOrder) {
+            res.parameters = res.parameters.sort((a, b) => {
+              return temOrder.indexOf(a.name) - temOrder.indexOf(b.name)
+            })
+          }
+        }
+        // 组装post方法
         else res = { ...baseText.paths[i].post, url: i, method: 'post' }
         const searchIndex = baseText.tags.findIndex(
           item => item.name === res.tags[0]
@@ -28,6 +38,11 @@ const getData = async () => {
       }
     }
   })
+}
+
+// get方法参数排序
+const getOrder = {
+  getStatisticsByType: ['type', 'year', 'month', 'week']
 }
 
 const create = async () => {
@@ -75,10 +90,13 @@ const textTemplate = data => {
       address = address.slice(address.lastIndexOf('/') + 1)
       for (const i in baseText.definitions[address].properties) {
         if (baseText.definitions[address].properties.hasOwnProperty(i)) {
+          // 判断有无注释
           label = `${label}
- * @param ${i} ${baseText.definitions[address].properties[
-            i
-          ].description.trim()}`
+ * @param ${i} ${
+            baseText.definitions[address].properties[i].description
+              ? baseText.definitions[address].properties[i].description.trim()
+              : ''
+          }`
         }
       }
     }
