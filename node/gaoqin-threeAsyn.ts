@@ -20,32 +20,42 @@ let cp = {
   // 打包&&提交svn
   uploadSvn: (adress1: string = dir1) => {
     shell.cd(adress1)
-    shell.echo('打包目录：' + path.resolve('./'))
+    shell.cd('..')
+    // svn更新
+    console.log('snv更新:' + path.resolve('./'))
+    shell.exec('svn update')
+    // 有冲突时停止
+    if (shell.exec('svn status|grep ^C').length > 0) return
+    console.log('无冲突')
+    // 切换到code目录打包后提交
+    shell.cd('code')
+    console.log('打包目录：' + path.resolve('./'))
     shell.exec('npm run build', () => {
-      shell.echo('打包完毕')
       shell.cd('..')
-      shell.echo('提交svn目录：' + path.resolve('./'))
-      // svn更新
-      shell.exec('svn update')
-      // 无冲突键入commit后提交
-      if (shell.exec('svn status|grep ^C').length === 0) {
-        shell.echo('无冲突')
-        const rl = readline.createInterface({
-          input: process.stdin,
-          output: process.stdout,
-          prompt: '请输入commit\n'
+      shell.echo('无冲突')
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        prompt: '请输入commit\n'
+      })
+      rl.prompt()
+      rl.on('line', line => {
+        // 添加文件
+        shell.exec('svn add * --force')
+        // 删除文件
+        let delData: any = shell.exec('svn status|grep ^!')
+        delData = delData.stdout.split('\r\n')
+        delData.forEach(item => {
+          let delUrl = item.slice(1).trim()
+          shell.exec(`svn delete ${delUrl}`)
         })
-        rl.prompt()
-        rl.on('line', line => {
-          shell.exec('svn add * --force')
-          shell.exec(`svn commit -m ${line}`)
-          cp.sendEmail(line)
-            .then(() => process.exit())
-            .catch(console.error)
-        })
-      } else {
-        shell.echo('有冲突!!!')
-      }
+        // 提交
+        shell.exec(`svn commit -m ${line}`)
+        // 邮件
+        cp.sendEmail(line)
+          .then(() => process.exit())
+          .catch(console.error)
+      })
     })
   },
   // email
@@ -70,7 +80,6 @@ let cp = {
       html: `<div>${message}</div>`
     })
     console.log('Message sent: %s', info.messageId)
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
   },
   run: () => {
     if (!cp.testAdress()) return

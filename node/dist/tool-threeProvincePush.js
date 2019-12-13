@@ -14,12 +14,14 @@ const path = require("path");
 const fs = require("fs");
 const readline = require("readline");
 const nodemailer = require("nodemailer");
-const dir1 = 'e:/com.better.synchro1/code'; // svn地址
+const dir1 = 'd:/october'; // 工作地址
+const dir2 = 'd:/three-province/code'; // svn内code地址
 let cp = {
     // 验证路径
-    testAdress: (adress1 = dir1) => {
+    testAdress: (adress1 = dir1, adress2 = dir2) => {
         try {
             fs.accessSync(adress1, fs.constants.R_OK | fs.constants.W_OK);
+            fs.accessSync(adress2, fs.constants.R_OK | fs.constants.W_OK);
             return true;
         }
         catch (error) {
@@ -27,9 +29,21 @@ let cp = {
             return false;
         }
     },
-    // 打包&&提交svn
-    uploadSvn: (adress1 = dir1) => {
+    // 拷贝文件
+    dir1ToDir2: (adress1 = dir1, adress2 = dir2) => {
         shell.cd(adress1);
+        shell.echo('源文件目录：' + path.resolve('./'));
+        shell.echo('开始拷贝');
+        shell.ls('-A').forEach(item => {
+            if (item === '.git' || item === 'node_modules')
+                return;
+            shell.cp('-r', item, adress2);
+        });
+        shell.echo('拷贝结束');
+    },
+    // 打包&&提交svn
+    uploadSvn: (adress1 = dir1, adress2 = dir2) => {
+        shell.cd(adress2);
         shell.cd('..');
         // svn更新
         console.log('snv更新:' + path.resolve('./'));
@@ -43,11 +57,10 @@ let cp = {
         console.log('打包目录：' + path.resolve('./'));
         shell.exec('npm run build', () => {
             shell.cd('..');
-            shell.echo('无冲突');
             const rl = readline.createInterface({
                 input: process.stdin,
                 output: process.stdout,
-                prompt: '请输入commit\n'
+                prompt: '请输入commit: '
             });
             rl.prompt();
             rl.on('line', line => {
@@ -86,7 +99,7 @@ let cp = {
         let info = yield transporter.sendMail({
             from: '"三同步svn更新" <dxy5395@qq.com>',
             to: '708968251@qq.com',
-            subject: 'svn更新',
+            subject: '三同步省级项目',
             text: message,
             html: `<div>${message}</div>`
         });
@@ -95,8 +108,9 @@ let cp = {
     run: () => {
         if (!cp.testAdress())
             return;
+        cp.dir1ToDir2();
         cp.uploadSvn();
     }
 };
 cp.run();
-//# sourceMappingURL=gaoqin-threeAsyn.js.map
+//# sourceMappingURL=tool-threeProvincePush.js.map

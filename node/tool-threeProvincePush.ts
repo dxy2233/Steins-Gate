@@ -44,7 +44,6 @@ let cp = {
     shell.cd('code')
     console.log('打包目录：' + path.resolve('./'))
     shell.exec('npm run build', () => {
-      console.log('打包完毕')
       shell.cd('..')
       const rl = readline.createInterface({
         input: process.stdin,
