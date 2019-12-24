@@ -21,27 +21,27 @@ let cp = {
   },
   // 拷贝文件
   dir1ToDir2: (adress1: string = dir1, adress2: string = dir2) => {
+    // 删除工作目录文件
+    shell.cd(adress2)
+    console.log('进入工作目录：' + path.resolve('./'))
+    console.log('清除文件准备同步')
+    shell.ls('-A').forEach(item => {
+      if (item === 'node_modules') return
+      shell.rm('-R', item)
+    })
+    // 拷贝文件
     shell.cd(adress1)
     shell.echo('源文件目录：' + path.resolve('./'))
-    shell.echo('开始拷贝')
+    console.log('拷贝文件')
     shell.ls('-A').forEach(item => {
       if (item === '.git' || item === 'node_modules') return
       shell.cp('-r', item, adress2)
     })
-    shell.echo('拷贝结束')
   },
   // 打包&&提交svn
   uploadSvn: (adress1: string = dir1, adress2: string = dir2) => {
     shell.cd(adress2)
-    shell.cd('..')
-    // svn更新
-    console.log('snv更新:' + path.resolve('./'))
-    shell.exec('svn update')
-    // 有冲突时停止
-    if (shell.exec('svn status|grep ^C').length > 0) return
-    console.log('无冲突')
     // 切换到code目录打包后提交
-    shell.cd('code')
     console.log('打包目录：' + path.resolve('./'))
     shell.exec('npm run build', () => {
       shell.cd('..')
