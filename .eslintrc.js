@@ -1,21 +1,20 @@
 module.exports = {
     root: true,
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true,
-        "node": true
+    env: {
+        browser: true,
+        // commonjs: true,
+        es6: true,
+        node: true,
     },
-    "extends": ["plugin:prettier/recommended"],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+    extends: ["plugin:prettier/recommended"],
+    parser: 'babel-eslint',
+    parserOptions: {
+        sourceType: 'module',
+        allowImportExportEverywhere: false,
+        codeFrame: true
     },
-    "parserOptions": {
-        "ecmaVersion": 2018
-    },
-    "rules": {
-        'no-unused-vars': 'error',
+    rules: {
+        // 'no-unused-vars': 'error',
         'prettier/prettier': [
             'error',
             {
