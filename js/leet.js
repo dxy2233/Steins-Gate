@@ -32,9 +32,8 @@ const twoSum = (nums, target) => {
 }
 // console.log(twoSum([2, 7, 11, 15], 9))
 
-/* 无重复字符的最长子串 */
-const lengthOfLongestSubstring = (s) => {
-  const occ = new Set()
-  return occ
+/* 二进制求和 */
+const addBinary = (a, b) => {
+  return (BigInt('0b' + a) + BigInt('0b' + b)).toString(2)
 }
-console.log(lengthOfLongestSubstring('abcabcbb'))
+// console.log(addBinary('11', '1'))
