@@ -70,6 +70,25 @@ const threeSumClosest = (nums, target) => {
 }
 // console.log(threeSumClosest([-1, 2, 1, -4], 1))
 
+/* 单词拆分 */
+const wordBreak = (s, wordDict) => {
+  const wordSet = new Set(wordDict)
+  const len = s.length
+  const dp = new Array(len + 1).fill(false)
+  dp[0] = true
+  for (let i = 1; i <= len; i++) {
+    for (let j = i; j >= 0; j--) {
+      const word = s.slice(j, i)
+      if (wordSet.has(word) && dp[j] == true) {
+        dp[i] = true
+        break
+      }
+    }
+  }
+  return dp[s.length]
+}
+console.log(wordBreak('leetcode', ['leet', 'code']))
+
 /* 长度最小的子数组 */
 const minSubArrayLen = (s, nums) => {
   // 暴力解法`
