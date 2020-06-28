@@ -68,5 +68,40 @@ const threeSumClosest = (nums, target) => {
   }
   return res
 }
-console.log(threeSumClosest([-1, 2, 1, -4], 1))
-// console.log(threeSumClosest([-1, 0, 1, 2, -1, -4], 0))
+// console.log(threeSumClosest([-1, 2, 1, -4], 1))
+
+/* 长度最小的子数组 */
+const minSubArrayLen = (s, nums) => {
+  // 暴力解法`
+  // let res = 0
+  // while (nums.length > 1) {
+  //   let rowNum = 0
+  //   const len = nums.length
+  //   for (let i = 0; i < len; i++) {
+  //     rowNum = rowNum + nums[i]
+  //     if (rowNum >= s) {
+  //       if (res === 0) res = i + 1
+  //       else if (i < res) res = i + 1
+  //       break
+  //     }
+  //   }
+  //   nums.shift()
+  // }
+  // return res
+  // 移动窗口
+  let minLen = Infinity,
+    left = 0,
+    right = 0,
+    sum = 0
+  const len = nums.length
+  while (right < len) {
+    sum += nums[right]
+    while (sum >= s) {
+      minLen = Math.min(minLen, right - left + 1)
+      sum -= nums[left++]
+    }
+    right++
+  }
+  return minLen === Infinity ? 0 : minLen
+}
+console.log(minSubArrayLen(7, [2, 3, 1, 2, 4, 3]))
