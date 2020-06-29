@@ -123,4 +123,11 @@ const minSubArrayLen = (s, nums) => {
   }
   return minLen === Infinity ? 0 : minLen
 }
-console.log(minSubArrayLen(7, [2, 3, 1, 2, 4, 3]))
+// console.log(minSubArrayLen(7, [2, 3, 1, 2, 4, 3]))
+
+/* 数组中的第K个最大元素 */
+const findKthLargest = (nums, k) => {
+  const sortNums = nums.sort((a, b) => b - a)
+  return sortNums[k - 1]
+}
+console.log(findKthLargest([3, 2, 1, 5, 6, 4], 2))
