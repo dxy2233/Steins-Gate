@@ -87,7 +87,7 @@ const wordBreak = (s, wordDict) => {
   }
   return dp[s.length]
 }
-console.log(wordBreak('leetcode', ['leet', 'code']))
+// console.log(wordBreak('leetcode', ['leet', 'code']))
 
 /* 长度最小的子数组 */
 const minSubArrayLen = (s, nums) => {
@@ -130,4 +130,50 @@ const findKthLargest = (nums, k) => {
   const sortNums = nums.sort((a, b) => b - a)
   return sortNums[k - 1]
 }
-console.log(findKthLargest([3, 2, 1, 5, 6, 4], 2))
+// console.log(findKthLargest([3, 2, 1, 5, 6, 4], 2))
+
+/* 有效的括号 */
+const isValid = (s) => {
+  // const len = s.length
+  // if (len % 2) return false
+  // const arry = []
+  // for (let i = 0; i < len; i++) {
+  //   const letter = s[i]
+  //   switch (letter) {
+  //     case '(':
+  //       arry.push(letter)
+  //       break
+  //     case '{':
+  //       arry.push(letter)
+  //       break
+  //     case '[':
+  //       arry.push(letter)
+  //       break
+  //     case ')':
+  //       if (arry.pop() !== '(') return false
+  //       break
+  //     case '}':
+  //       if (arry.pop() !== '{') return false
+  //       break
+  //     case ']':
+  //       if (arry.pop() !== '[') return false
+  //       break
+  //   }
+  // }
+  // return !arry.length
+
+  const map = {
+    '(': ')',
+    '{': '}',
+    '[': ']',
+  }
+  const stack = []
+  for (let i of s) {
+    if (map[i]) stack.push(map[i])
+    else {
+      if (stack.pop() !== i) return false
+    }
+  }
+  return !stack.length
+}
+console.log(isValid('{[]}'))
