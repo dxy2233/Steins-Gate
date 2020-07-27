@@ -176,4 +176,17 @@ const isValid = (s) => {
   }
   return !stack.length
 }
-console.log(isValid('{[]}'))
+// console.log(isValid('{[]}'))
+
+/* 判断子序列 */
+const isSubsequence = (s, t) => {
+  let index = -1
+  const len = s.length
+  for (let i = 0; i < len; i++) {
+    index = t.indexOf(s[i], index + 1)
+    if (index === -1) return false
+  }
+  return true
+}
+console.log(isSubsequence('abc', 'ahbgdc'))
+console.log(isSubsequence('aaaaaa', 'bbaaaa'))
