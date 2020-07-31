@@ -7,14 +7,14 @@
 </head>
 <body>
    <div class="wrap">
-       <div class="item">1</div>
-       <div class="item">2</div>
-       <div class="item">3</div>
-       <div class="item">4</div>
-       <div class="item">5</div>
-       <div class="item">6</div>
-       <div class="item">7</div>
-       <div class="item">8</div>
+       <div class="item"><span>1</span></div>
+       <div class="item"><span>2</span></div>
+       <div class="item"><span>3</span></div>
+       <div class="item"><span>4</span></div>
+       <div class="item"><span>5</span></div>
+       <div class="item"><span>6</span></div>
+       <div class="item"><span>7</span></div>
+       <div class="item"><span>8</span></div>
    </div> 
 </body>
 <style>
@@ -29,22 +29,34 @@
     .item {
         width: 50px;
         height: 50px;
-        background: burlywood;
+        /* background: burlywood; */
+        border: 1px solid red;
         border-radius: 50%;
         text-align: center;
         line-height: 50px;
         position: absolute;
         left: calc(200px - 25px);
+        top: -25px;
         top: calc(200px - 25px);
+        /* transform-origin: 25px 225px; */
+    }
+    .item span {
+        display: block;
+        width: 4px;
+        height: 4px;
+        margin: 23px auto;
+        background: red;
     }
     .wrap .item:nth-child(1) {
         transform: translate(0, -200px);
     }
     .wrap .item:nth-child(2) {
         transform: translate(141px, -141px);
+        /* transform: rotate(45deg); */
     }
     .wrap .item:nth-child(3) {
         transform: translate(200px, 0);
+        /* transform: rotate(90deg); */
     }
     .wrap .item:nth-child(4) {
         transform: translate(141px, 141px);
