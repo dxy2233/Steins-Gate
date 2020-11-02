@@ -1,7 +1,6 @@
 module.exports = {
   title: 'note',
   description: 'note',
-  base: '/Steins-Gate/',
   themeConfig: {
     nav: [
       { text: '日常笔记', link: '/note/package-yarn' },
