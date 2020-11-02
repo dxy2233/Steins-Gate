@@ -1,5 +1,25 @@
-# 1.io.Copy()
+# 文件操作
 
+## 判断文件或文件夹是否存在
+os.Stat()
+- 如果返回的错误为nil,说明文件或文件夹存在
+- 如果返回的错误类型使用os.IsNotExist()判断为true,说明文件或文件夹不存在
+- 如果返回的错误为其它类型,则不确定是否在存在
+```go
+func PathExists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true, nil
+	}
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+	return false, err
+}
+```
+
+## 文件拷贝
+### 1.io.Copy()
 ```go
 func copy ( src , dst string ) ( int64 , error ) { 
     sourceFileStat , err := os . Stat ( src ) 
@@ -25,9 +45,7 @@ func copy ( src , dst string ) ( int64 , error ) {
     nBytes , err := io . Copy ( destination , source ) 
     return nBytes , err
 ```
-
-# 2.ioutil.WriteFile（）和ioutil.ReadFile（）
-
+### 2.ioutil.WriteFile（）和ioutil.ReadFile（）
 ```go
 input , err := ioutil . ReadFile ( sourceFile ) 
     if err != nil { 
@@ -42,9 +60,7 @@ input , err := ioutil . ReadFile ( sourceFile )
             return 
     }
 ```
-
-# 3.os.Read（）和os.Write（）
-
+### 3.os.Read（）和os.Write（）
 ```go
 buf := make ([] byte , BUFFERSIZE ) 
     for { 

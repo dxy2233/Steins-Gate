@@ -1,0 +1,15 @@
+{
+  "name": "book",
+  "version": "1",
+  "main": "index.js",
+  "repository": "https://github.com/dxy2233/Steins-Gate.git",
+  "author": "dxy2233 <691369338@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "devDependencies": {
+    "vuepress": "^1.7.1"
+  }
+}
