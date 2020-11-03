@@ -18,6 +18,13 @@ module.exports = {
           ]
         },
         {
+          title: 'node',
+          collapsable: false,
+          children: [
+            ['/note/node-file', '文件操作'],
+          ]
+        },
+        {
           title: 'go',
           collapsable: false,
           children: [

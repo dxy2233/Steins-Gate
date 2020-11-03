@@ -35,4 +35,16 @@ const cosPut = filePath => {
     })
 }
 
-uploadFile('./docs/.vuepress/dist')
+// uploadFile('./docs/.vuepress/dist')
+
+const cosGet = () => {
+    cos.getBucket({
+        Bucket: local.bucket,
+        Region: local.region,
+    }, (err, data) => {
+        if (err) return err
+        const allFile = data.Contents
+    })
+}
+
+cosGet()
