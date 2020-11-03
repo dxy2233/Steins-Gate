@@ -1,7 +1,7 @@
 ---
 home: true
 # heroImage: /hero.png
-heroText: 个人笔记
+heroText: 私人笔记
 # tagline: Hero 副标题
 actionText: 进入 →
 actionLink: /note/package-yarn/

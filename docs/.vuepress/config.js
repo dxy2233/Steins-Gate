@@ -1,9 +1,12 @@
 module.exports = {
-  title: 'note',
-  description: 'note',
+  title: 'Note',
+  // description: 'note',
+  head: [
+    ['link', { rel: 'icon', href: '/img/cat.ico' }]
+  ],
   themeConfig: {
     nav: [
-      { text: '日常笔记', link: '/note/package-yarn' },
+      { text: '日常记录', link: '/note/package-yarn' },
     ],
     sidebar: {
       '/note/': [
