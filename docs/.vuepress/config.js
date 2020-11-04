@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Note',
-  // description: 'note',
+  description: '一些记录与碎片提示',
   head: [
     ['link', { rel: 'icon', href: '/img/cat.ico' }]
   ],
