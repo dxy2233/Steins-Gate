@@ -6,18 +6,15 @@
 ## vscode常用配置
 ```json
 {
-  // 首选firacode,次选雅黑
+  // 字体首选firacode,次选雅黑
   "editor.fontFamily": "Fira Code Retina, Microsoft Yahei UI",
-
   // vim配置
   "vim.leader": "<space>",
   "vim.easymotion": true,
-
   // eslint保存验证
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-
   // 触发eslint验证的文件类型
   "eslint.validate": [
     "javascript",
@@ -28,7 +25,6 @@
     "html",
     "css",
   ],
-
   // 把xx文件视为yy文件（常用于小程序）
  "files.associations": {
     "*.wxss": "css",

@@ -2,6 +2,16 @@
 
 ## 美化
 - 确保是新版powershell
+  - gitlog信息无法正确显示中文的解决办法:
+
+    系统环境变量中添加变量LESSCHARSET为utf-8
+    ```
+    git config --global core.quotepath false
+    git config --global gui.encoding utf-8
+    git config --global i18n.commit.encoding utf-8
+    git config --global i18n.logoutputencoding utf-8
+    $env:LESSCHARSET='utf-8'
+    ```
 
 - 字体:
   - [Fira Code](https://github.com/tonsky/FiraCode)
@@ -36,4 +46,5 @@
     }
     ```
   - [windowsterminalthemes](https://windowsterminalthemes.dev/) terminal主题网站
+  - window资源管理器ALT+l开始编辑地址栏，输入wt在次目录打开terminal
 
