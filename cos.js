@@ -8,48 +8,33 @@ const cos = new COS({
     SecretKey: local.key,
 })
 
-const cosPutFile = filePath => new Promise((resolve, reject) => {
-    filePath = filePath.replace(/\\/g, '\/')
-    cos.putObject({
+// type是cos对象的内置方法 文档地址: https://cloud.tencent.com/document/product/436/8629
+// getBucket 获取存储桶信息
+// putObject 简单上传
+// deleteMultipleObject 批量删除
+const cosObject = (type, parame) => new Promise((resolve, reject) => {
+    cos[type](Object.assign({
         Bucket: local.bucket,
         Region: local.region,
-        Key: filePath.slice(filePath.indexOf('dist') + 5),
-        Body: fs.createReadStream(filePath),
-    }, (err, data) => {
+    }, parame), (err, data) => {
         err ? reject(err) : resolve(data)
     })
 })
-
-const cosGet = () => new Promise((resolve, reject) => {
-    cos.getBucket({
-        Bucket: local.bucket,
-        Region: local.region,
-    }, (err, data) => {
-        err ? reject(err) : resolve(data)
-    })
-}) 
-
-const cosDelObjects = objects => new Promise((resolve, reject) => {
-    cos.deleteMultipleObject({
-        Bucket: local.bucket,
-        Region: local.region,
-        Objects: objects,
-    }, (err, data) => {
-        err ? reject(err) : resolve(data)
-        console.log(data)
-    })
-}) 
 
 const uploadFile = filePath => new Promise((resolve, reject) => {
     let targetNum = 0
     const loop = filePath => {
         fs.readdir(filePath, (err, list) => {
             list.forEach(item => {
-                const itemPath = path.resolve(filePath, item)
+                const itemPath = path.resolve(filePath, item).replace(/\\/g, '\/')
                 fs.stat(itemPath, (err, data) => {
                     if (data.isFile()) {
                         targetNum++
-                        cosPutFile(itemPath).then(res => {
+                        cosObject('putObject', {
+                            Key: itemPath.slice(itemPath.indexOf('dist') + 5),
+                            Body: fs.createReadStream(itemPath),
+                        })
+                        .then(res => {
                             console.log(res)
                             targetNum--
                             if (targetNum === 0) resolve()
@@ -66,7 +51,7 @@ const uploadFile = filePath => new Promise((resolve, reject) => {
 const removeFiles = bucketInfo => new Promise((resolve, reject) => {
     const allFile = bucketInfo.Contents
     let typeArray = []
-    const gapMax = 2 * 60 * 1000 // 2分钟的毫秒数
+    const gapMax = 2 * 60 * 1000 // 上传间隔以2分钟为一类
     allFile.forEach((file, index) => {
         if (index === 0) {
             typeArray[0] = []
@@ -91,18 +76,24 @@ const removeFiles = bucketInfo => new Promise((resolve, reject) => {
     // 排序、删除最新2个版本之外的文件
     typeArray = typeArray.sort((a, b) => new Date(b[0].LastModified).getTime() -
         new Date(a[0].LastModified).getTime())
+    if (typeArray.length < 3) {
+        resolve('无过期版本')
+        return
+    }
     typeArray.splice(0, 2)
     const delFiles = typeArray.flat().map(file => {
         return { Key: file.Key }
     })
-    cosDelObjects(delFiles)
+    cosObject('deleteMultipleObject', { Objects: delFiles }).then(res => resolve(res))
+    .catch(err => reject(err))
 })
 
 const main = async () => {
     try {
         await uploadFile('./docs/.vuepress/dist') 
-        const bucketInfo = await cosGet()
-        removeFiles(bucketInfo)
+        const bucketInfo = await cosObject('getBucket')
+        const removeInfo = await removeFiles(bucketInfo)
+        console.log(removeInfo)
     } catch(err) {
         console.log(err)
     }

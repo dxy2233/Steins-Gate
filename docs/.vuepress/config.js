@@ -11,10 +11,12 @@ module.exports = {
     sidebar: {
       '/note/': [
         {
-          title: '包管理',
+          title: 'tool',
           collapsable: false,
           children: [
             ['/note/package-yarn', 'yarn'],
+            ['/note/package-powershell', 'powershell'],
+            ['/note/package-editor', '编辑器'],
           ]
         },
         {
