@@ -45,6 +45,7 @@
       "useAcrylic": false,
     }
     ```
+  - [配置项目官方文档](https://docs.microsoft.com/zh-cn/windows/terminal/customize-settings/profile-settings)
   - [windowsterminalthemes](https://windowsterminalthemes.dev/) terminal主题网站
-  - window资源管理器ALT+l开始编辑地址栏，输入wt在次目录打开terminal
+  - window资源管理器中ctrl+l光标跳转到地址栏，输入wt回车在此目录打开terminal
 
