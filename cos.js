@@ -22,7 +22,8 @@ const cosObject = (type, parame) => new Promise((resolve, reject) => {
 })
 
 const uploadFile = filePath => new Promise((resolve, reject) => {
-    let targetNum = 0
+    let targetNum = 0 // 异步计数
+    const resList = [] // 上传结果的统计
     const loop = filePath => {
         fs.readdir(filePath, (err, list) => {
             list.forEach(item => {
@@ -35,9 +36,9 @@ const uploadFile = filePath => new Promise((resolve, reject) => {
                             Body: fs.createReadStream(itemPath),
                         })
                         .then(res => {
-                            console.log(res)
+                            resList.push(res)
                             targetNum--
-                            if (targetNum === 0) resolve()
+                            if (targetNum === 0) resolve(resList)
                         }).catch(err => reject(err))
                     }
                     else loop(itemPath)
@@ -50,6 +51,7 @@ const uploadFile = filePath => new Promise((resolve, reject) => {
 
 const removeFiles = bucketInfo => new Promise((resolve, reject) => {
     const allFile = bucketInfo.Contents
+    // 按上传时间分类出不同的版本
     let typeArray = []
     const gapMax = 2 * 60 * 1000 // 上传间隔以2分钟为一类
     allFile.forEach((file, index) => {
@@ -90,7 +92,8 @@ const removeFiles = bucketInfo => new Promise((resolve, reject) => {
 
 const main = async () => {
     try {
-        await uploadFile('./docs/.vuepress/dist') 
+        const uploadRes = await uploadFile('./docs/.vuepress/dist')
+        console.log(uploadRes.map(item => item.Location))
         const bucketInfo = await cosObject('getBucket')
         const removeInfo = await removeFiles(bucketInfo)
         console.log(removeInfo)
