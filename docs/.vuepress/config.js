@@ -20,6 +20,13 @@ module.exports = {
           ]
         },
         {
+          title: 'js',
+          collapsable: false,
+          children: [
+            ['/note/js-vue', 'vue'],
+          ]
+        },
+        {
           title: 'node',
           collapsable: false,
           children: [
