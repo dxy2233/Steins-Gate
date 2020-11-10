@@ -23,7 +23,15 @@ module.exports = {
           title: 'js',
           collapsable: false,
           children: [
+            ['/note/js-math', 'math相关'],
             ['/note/js-vue', 'vue'],
+          ]
+        },
+        {
+          title: 'css',
+          collapsable: false,
+          children: [
+            ['/note/css-effect', '一些效果'],
           ]
         },
         {
