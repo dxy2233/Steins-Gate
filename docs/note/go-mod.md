@@ -1,6 +1,9 @@
-# go mod
+# go包管理
 
-## 常用命令
+## 代理
+参考文档 [goproxy.io](https://goproxy.io/zh/)
+
+## go mod命令
 | 命令 | 说明 |
 | ---- | ---- |
 | download | download modules to local cache(下载依赖包) |
