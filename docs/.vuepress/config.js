@@ -45,6 +45,7 @@ module.exports = {
           title: 'go',
           collapsable: false,
           children: [
+            ['/note/go-mod', 'go mod'],
             ['/note/go-file', '文件操作'],
           ]
         },
