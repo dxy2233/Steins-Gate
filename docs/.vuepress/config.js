@@ -47,6 +47,8 @@ module.exports = {
           children: [
             ['/note/go-mod', 'go mod'],
             ['/note/go-file', '文件操作'],
+            ['/note/go-http', '网络相关'],
+            ['/note/go-dirStruc', '目录结构推荐'],
           ]
         },
       ]

@@ -1,4 +1,4 @@
-# go包管理
+# go的一些命令
 
 ## 代理
 参考文档 [goproxy.io](https://goproxy.io/zh/)
