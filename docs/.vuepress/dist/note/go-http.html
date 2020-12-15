@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>网络相关 | Note</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/img/cat.ico">
+    <meta name="description" content="一些记录与碎片提示">
+    
+    <link rel="preload" href="/assets/css/0.styles.290e9ffc.css" as="style"><link rel="preload" href="/assets/js/app.cb34f01c.js" as="script"><link rel="preload" href="/assets/js/2.fcc7eb73.js" as="script"><link rel="preload" href="/assets/js/12.f835bff4.js" as="script"><link rel="prefetch" href="/assets/js/10.5b3b5ff6.js"><link rel="prefetch" href="/assets/js/11.514aec24.js"><link rel="prefetch" href="/assets/js/13.d8ad46df.js"><link rel="prefetch" href="/assets/js/14.4d93c2f8.js"><link rel="prefetch" href="/assets/js/15.776cbf7b.js"><link rel="prefetch" href="/assets/js/16.a8dcbf58.js"><link rel="prefetch" href="/assets/js/17.e93410db.js"><link rel="prefetch" href="/assets/js/18.0706bc08.js"><link rel="prefetch" href="/assets/js/19.f6f75d0e.js"><link rel="prefetch" href="/assets/js/3.ae0f4bc7.js"><link rel="prefetch" href="/assets/js/4.a8f857cd.js"><link rel="prefetch" href="/assets/js/5.f38c63b2.js"><link rel="prefetch" href="/assets/js/6.d09cb291.js"><link rel="prefetch" href="/assets/js/7.4bcf017a.js"><link rel="prefetch" href="/assets/js/8.8f8b2c14.js"><link rel="prefetch" href="/assets/js/9.92ff5e6e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.290e9ffc.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Note</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/note/package-yarn.html" class="nav-link">
+  日常记录
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/note/package-yarn.html" class="nav-link">
+  日常记录
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>tool</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/note/package-yarn.html" class="sidebar-link">yarn</a></li><li><a href="/note/package-powershell.html" class="sidebar-link">powershell</a></li><li><a href="/note/package-editor.html" class="sidebar-link">编辑器</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>js</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/note/js-math.html" class="sidebar-link">math相关</a></li><li><a href="/note/js-vue.html" class="sidebar-link">vue</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>css</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/note/css-effect.html" class="sidebar-link">一些效果</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>node</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/note/node-file.html" class="sidebar-link">文件操作</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>go</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/note/go-mod.html" class="sidebar-link">go mod</a></li><li><a href="/note/go-file.html" class="sidebar-link">文件操作</a></li><li><a href="/note/go-http.html" aria-current="page" class="active sidebar-link">网络相关</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/note/go-http.html#net-http" class="sidebar-link">net/http</a></li><li class="sidebar-sub-header"><a href="/note/go-http.html#http-request类型详解" class="sidebar-link">*http.Request类型详解</a></li></ul></li><li><a href="/note/go-dirStruc.html" class="sidebar-link">目录结构推荐</a></li><li><a href="/note/go-house.html" class="sidebar-link">常用三方库</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="网络相关"><a href="#网络相关" class="header-anchor">#</a> 网络相关</h1> <h2 id="net-http"><a href="#net-http" class="header-anchor">#</a> net/http</h2> <div class="language-go extra-class"><pre class="language-go"><code><span class="token function">httpListenAndServe</span><span class="token punctuation">(</span>port <span class="token builtin">string</span><span class="token punctuation">,</span> handler Handler<span class="token punctuation">)</span>
+</code></pre></div><p>第一个参数是监听的端口、第二个参数是根页面的处理函数，可以为空</p> <h2 id="http-request类型详解"><a href="#http-request类型详解" class="header-anchor">#</a> *http.Request类型详解</h2> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">sayhello</span><span class="token punctuation">(</span>w http<span class="token punctuation">.</span>ResponseWriter<span class="token punctuation">,</span> r <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token comment">// r.ParseForm()       //解析参数，默认是不会解析的</span>
+	<span class="token comment">//这些信息是输出到服务器端的打印信息</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Request解析&quot;</span><span class="token punctuation">)</span>
+	<span class="token comment">//HTTP方法</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;method&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>Method<span class="token punctuation">)</span>
+	<span class="token comment">// RequestURI是被客户端发送到服务端的请求的请求行中未修改的请求URI</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;RequestURI&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>RequestURI<span class="token punctuation">)</span>
+	<span class="token comment">//URL类型,下方分别列出URL的各成员</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;URL_scheme&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>URL<span class="token punctuation">.</span>Scheme<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;URL_opaque&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>URL<span class="token punctuation">.</span>Opaque<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;URL_user&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>URL<span class="token punctuation">.</span>User<span class="token punctuation">.</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;URL_host&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>URL<span class="token punctuation">.</span>Host<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;URL_path&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>URL<span class="token punctuation">.</span>Path<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;URL_RawQuery&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>URL<span class="token punctuation">.</span>RawQuery<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;URL_Fragment&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>URL<span class="token punctuation">.</span>Fragment<span class="token punctuation">)</span>
+	<span class="token comment">//协议版本</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;proto&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>Proto<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;protomajor&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>ProtoMajor<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;protominor&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>ProtoMinor<span class="token punctuation">)</span>
+	<span class="token comment">//HTTP请求的头域</span>
+	<span class="token keyword">for</span> k<span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> r<span class="token punctuation">.</span>Header <span class="token punctuation">{</span>
+		<span class="token comment">// fmt.Println(&quot;Header key:&quot; + k)</span>
+		<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> vv <span class="token operator">:=</span> <span class="token keyword">range</span> v <span class="token punctuation">{</span>
+			fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;header key:&quot;</span> <span class="token operator">+</span> k <span class="token operator">+</span> <span class="token string">&quot;  value:&quot;</span> <span class="token operator">+</span> vv<span class="token punctuation">)</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+	<span class="token comment">//判断是否multipart方式</span>
+	is_multipart <span class="token operator">:=</span> <span class="token boolean">false</span>
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> r<span class="token punctuation">.</span>Header<span class="token punctuation">[</span><span class="token string">&quot;Content-Type&quot;</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+		<span class="token keyword">if</span> strings<span class="token punctuation">.</span><span class="token function">Index</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> <span class="token string">&quot;multipart/form-data&quot;</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">{</span>
+			is_multipart <span class="token operator">=</span> <span class="token boolean">true</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+	<span class="token comment">//解析body</span>
+	<span class="token keyword">if</span> is_multipart <span class="token operator">==</span> <span class="token boolean">true</span> <span class="token punctuation">{</span>
+		r<span class="token punctuation">.</span><span class="token function">ParseMultipartForm</span><span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">)</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;解析方式:ParseMultipartForm&quot;</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+		r<span class="token punctuation">.</span><span class="token function">ParseForm</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;解析方式:ParseForm&quot;</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span>
+	<span class="token comment">//body内容长度</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;ContentLength&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>ContentLength<span class="token punctuation">)</span>
+	<span class="token comment">//是否在回复请求后关闭连接</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Close&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>Close<span class="token punctuation">)</span>
+	<span class="token comment">//HOSt</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;host&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>Host<span class="token punctuation">)</span>
+	<span class="token comment">//form</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Form&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>Form<span class="token punctuation">)</span>
+	<span class="token comment">//postform</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;PostForm&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>PostForm<span class="token punctuation">)</span>
+	<span class="token comment">//MultipartForm</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;MultipartForm&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>MultipartForm<span class="token punctuation">)</span>
+	<span class="token comment">//解析MultipartForm内的文件</span>
+	files <span class="token operator">:=</span> r<span class="token punctuation">.</span>MultipartForm<span class="token punctuation">.</span>File
+	<span class="token keyword">for</span> k<span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> files <span class="token punctuation">{</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span>
+		<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> vv <span class="token operator">:=</span> <span class="token keyword">range</span> v <span class="token punctuation">{</span>
+			fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>k <span class="token operator">+</span> <span class="token string">&quot;:&quot;</span> <span class="token operator">+</span> vv<span class="token punctuation">.</span>Filename<span class="token punctuation">)</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+	<span class="token comment">//该请求的来源地址</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;RemoteAddr&quot;</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>RemoteAddr<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Fprintf</span><span class="token punctuation">(</span>w<span class="token punctuation">,</span> <span class="token string">&quot;hello astaxie!&quot;</span><span class="token punctuation">)</span> <span class="token comment">//这个写入到w的是输出到客户端的</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/note/go-file.html" class="prev">
+        文件操作
+      </a></span> <span class="next"><a href="/note/go-dirStruc.html">
+        目录结构推荐
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.cb34f01c.js" defer></script><script src="/assets/js/2.fcc7eb73.js" defer></script><script src="/assets/js/12.f835bff4.js" defer></script>
+  </body>
+</html>

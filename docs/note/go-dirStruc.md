@@ -1,6 +1,7 @@
 # 目录结构推荐
 
 ## 目录结构
+一定使用go mod创建项目
 [参考](https://github.com/golang-standards/project-layout/blob/master/README_zh.md)
 
 ## Go目录
