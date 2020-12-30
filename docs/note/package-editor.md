@@ -13,48 +13,20 @@
   "vim.easymotion": true,
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": [
-          "<leader>",
-          "k"
-      ],
-      "after": [
-          "<leader>",
-          "<leader>",
-          "k",
-      ]
+      "before": ["<leader>", "k"],
+      "after": ["<leader>", "<leader>", "k"]
     },
     {
-      "before": [
-          "<leader>",
-          "j"
-      ],
-      "after": [
-          "<leader>",
-          "<leader>",
-          "j",
-      ]
+      "before": ["<leader>", "j"],
+      "after": ["<leader>", "<leader>", "j"]
     },
     {
-      "before": [
-          "<leader>",
-          "f"
-      ],
-      "after": [
-          "<leader>",
-          "<leader>",
-          "f",
-      ]
+      "before": ["<leader>", "f"],
+      "after": ["<leader>", "<leader>", "f"]
     },
     {
-      "before": [
-          "<leader>",
-          "F"
-      ],
-      "after": [
-          "<leader>",
-          "<leader>",
-          "F",
-      ]
+      "before": ["<leader>", "F"],
+      "after": ["<leader>", "<leader>", "F"]
     },
   ],
   // eslint保存验证
