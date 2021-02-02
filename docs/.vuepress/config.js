@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Note',
+  title: 'Pensieve',
   description: '一些记录与碎片提示',
   head: [
     ['link', { rel: 'icon', href: '/img/cat.ico' }]
@@ -24,6 +24,7 @@ module.exports = {
           collapsable: false,
           children: [
             ['/note/js-math', 'math相关'],
+            ['/note/js-api', 'api参考'],
             ['/note/js-vue', 'vue'],
           ]
         },
