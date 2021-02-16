@@ -21,3 +21,16 @@ const randomAll = (min, max) =>
 const round = (n, decimals = 0) =>
   Number(`${Math.round(`${n}e${decimals}`)}e-${decimals}`)
 ```
+
+## 数字补零
+```js
+const padding = (num, length) => {
+  //这里用slice和substr均可
+  return (Array(length).join('0') + num).slice(-length)
+}
+```
+
+## 判断是否为数字
+```js
+Number.isFinite(value)
+```
