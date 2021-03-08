@@ -21,11 +21,11 @@
 - 主题库 `Install-Module oh-my-posh -Scope CurrentUser`
   - [官方库](https://github.com/ohmyzsh/ohmyzsh/tree/master/themes)
 
-- 安装vscode后输入`code $profile`打开powershell初始化配置
+- 安装vscode后命令行输入`code $profile`打开powershell初始化配置
   ```
   Import-Module posh-git
   Import-Module oh-my-posh
-  Set-Theme Paradox
+  Set-PoshPrompt -Theme Powerlevel10k_Lean
   ```
 
 - 使用Terminal 
