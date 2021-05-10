@@ -11,6 +11,6 @@
   },
   "devDependencies": {
     "cos-nodejs-sdk-v5": "^2.8.3",
-    "vuepress": "^1.7.1"
+    "vuepress": "^1.8.2"
   }
 }

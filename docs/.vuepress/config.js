@@ -17,6 +17,8 @@ module.exports = {
             ['/note/package-yarn', 'yarn'],
             ['/note/package-powershell', 'powershell'],
             ['/note/package-editor', '编辑器'],
+            ['/note/package-git', 'git'],
+            ['/note/package-vim', 'vim'],
           ]
         },
         {
