@@ -14,12 +14,12 @@
 ## 替换
 `:[range]s/source/target/[option]`
 
-range:
-* % 整个文档(相当于1，$)
-* start,end 某行到某行
+* range:
+    * % 整个文档(相当于1，$)
+    * start,end 某行到某行
 
-options:
-* g 全局替换
-* c 确认
-* p 替换结果逐行显示
-* i 不区分大小写
+* options:
+    * g 全局替换
+    * c 确认
+    * p 替换结果逐行显示
+    * i 不区分大小写
