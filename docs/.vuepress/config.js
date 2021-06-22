@@ -22,6 +22,13 @@ module.exports = {
           ]
         },
         {
+          title: 'html',
+          collapsable: false,
+          children: [
+            ['/note/html-tip', '不常用功能']
+          ]
+        },
+        {
           title: 'js',
           collapsable: false,
           children: [
