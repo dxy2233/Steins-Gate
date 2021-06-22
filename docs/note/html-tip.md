@@ -3,12 +3,12 @@
 ## 图片懒加载
 * 滚动到才开始加载
 * can i use: 73.98% (2021/06/22)
-``` js
+``` html
 <img src='image.jpg' loading='lazy' alt='Alternative Text'> 
 ```
 
 ## 电子邮件、电话和短信链接
-``` js
+``` html
 <a href="mailto:{email}?subject={subject}&body={content}">
   Send us an email
 </a>
