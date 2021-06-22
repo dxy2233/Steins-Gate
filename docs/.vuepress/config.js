@@ -2,7 +2,7 @@ module.exports = {
   title: 'Pensieve',
   description: '一些记录与碎片提示',
   head: [
-    ['link', { rel: 'icon', href: '/img/cat.ico' }]
+    ['link', { rel: 'icon', href: '/img/cat.ico?v2' }]
   ],
   themeConfig: {
     nav: [
@@ -25,7 +25,7 @@ module.exports = {
           title: 'html',
           collapsable: false,
           children: [
-            ['/note/html-tip', '不常用功能']
+            ['/note/html-tip', '不常用功能'],
           ]
         },
         {
