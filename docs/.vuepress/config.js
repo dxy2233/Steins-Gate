@@ -33,6 +33,7 @@ module.exports = {
           collapsable: false,
           children: [
             ['/note/js-math', 'math相关'],
+            ['/note/js-date', '日期相关'],
             ['/note/js-api', 'api参考'],
             ['/note/js-vue', 'vue'],
           ]
