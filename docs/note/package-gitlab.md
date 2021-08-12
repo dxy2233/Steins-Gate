@@ -1,11 +1,11 @@
 # gitlab
 
-## gitlab docker部署
+## gitlab docker
 ```
 // 拉取镜像
 docker pull gitlab/gitlab-ce:latest
 
-// 运行容器
+// 运行容器，映射宿主机路径可随意更改
 docker run \
  -itd  \
  -p 9980:80 \
@@ -40,7 +40,8 @@ external_url 'http://192.168.0.33'
 gitlab_rails['gitlab_ssh_host'] = '192.168.0.33'
 gitlab_rails['gitlab_shell_ssh_port'] = 9922
 ```
-保存后运行 gitlab-ctl reconfigure 会生成新的gitlab.yml文件但external_url加端口号会导致无法访问，可以直接跳过该步骤直接修改gitlab.yml文件
+保存后运行 gitlab-ctl reconfigure 会生成新的gitlab.yml文件
+但external_url加端口号会导致无法访问，可以直接跳过该步骤直接修改gitlab.yml文件
 
 ```
 // 打开配置文件
