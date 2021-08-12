@@ -19,6 +19,7 @@ module.exports = {
             ['/note/package-editor', '编辑器'],
             ['/note/package-git', 'git'],
             ['/note/package-vim', 'vim'],
+            ['/note/package-gitlab', 'gitlab'],
           ]
         },
         {
