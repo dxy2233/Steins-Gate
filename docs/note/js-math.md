@@ -34,3 +34,6 @@ const padding = (num, length) => {
 ```js
 Number.isFinite(value)
 ```
+
+## 唯一ID生成
+* 可以使用[nanoid](https://github.com/ai/nanoid#readme)

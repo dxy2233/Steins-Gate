@@ -2,7 +2,7 @@ module.exports = {
   title: 'Pensieve',
   description: '一些记录与碎片提示',
   head: [
-    ['link', { rel: 'icon', href: '/img/cat.ico?v2' }]
+    ['link', { rel: 'icon', href: '/img/cat.ico' }]
   ],
   themeConfig: {
     nav: [
@@ -65,6 +65,13 @@ module.exports = {
             ['/note/go-house', '常用三方库'],
           ]
         },
+        {
+          title: '杂项',
+          collapsable: false,
+          children: [
+            ['/note/sundry-m3u8', '视频流下载'],
+          ]
+        }
       ]
     }
  }
