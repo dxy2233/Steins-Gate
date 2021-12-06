@@ -36,8 +36,9 @@ module.exports = {
             ['/note/js-math', 'math相关'],
             ['/note/js-date', '日期相关'],
             ['/note/js-api', 'api参考'],
-            ['/note/js-vue', 'vue'],
+            ['/note/js-algorithm', '算法相关'],
             ['/note/js-image', '图片相关'],
+            ['/note/js-vue', 'vue'],
           ]
         },
         {
