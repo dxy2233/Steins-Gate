@@ -64,6 +64,7 @@ module.exports = {
             ['/note/go-http', '网络相关'],
             ['/note/go-dirStruc', '目录结构推荐'],
             ['/note/go-house', '常用三方库'],
+            ['/note/go-wasm', 'wasm'],
           ]
         },
         {
