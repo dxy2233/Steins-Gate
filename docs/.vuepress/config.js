@@ -68,6 +68,13 @@ module.exports = {
           ]
         },
         {
+          title: 'rust',
+          collapsable: false,
+          children: [
+            ['/note/rust-hello', 'rust入门'],
+          ]
+        },
+        {
           title: '杂项',
           collapsable: false,
           children: [
