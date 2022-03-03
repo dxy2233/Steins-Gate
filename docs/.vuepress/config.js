@@ -38,6 +38,7 @@ module.exports = {
             ['/note/js-api', 'api参考'],
             ['/note/js-algorithm', '算法相关'],
             ['/note/js-image', '图片相关'],
+            ['/note/js-event', '事件相关'],
             ['/note/js-vue', 'vue'],
           ]
         },
@@ -72,6 +73,7 @@ module.exports = {
           collapsable: false,
           children: [
             ['/note/rust-hello', 'rust入门'],
+            ['/note/rust-wasm', 'wasm'],
           ]
         },
         {
