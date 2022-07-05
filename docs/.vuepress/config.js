@@ -54,6 +54,7 @@ module.exports = {
           collapsable: false,
           children: [
             ['/note/node-file', '文件操作'],
+            ['/note/node-svg', 'svg压缩工具'],
           ]
         },
         {
