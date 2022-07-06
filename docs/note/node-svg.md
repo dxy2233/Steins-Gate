@@ -3,7 +3,6 @@
 ## 安装
 ```shell
 pnpm add svgo -g
-
 ```
 
 ## 命令行使用
