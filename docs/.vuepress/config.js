@@ -40,6 +40,7 @@ module.exports = {
             ['/note/js-image', '图片相关'],
             ['/note/js-event', '事件相关'],
             ['/note/js-vue', 'vue'],
+            ['/note/js-rxjs', 'rxjs'],
           ]
         },
         {
