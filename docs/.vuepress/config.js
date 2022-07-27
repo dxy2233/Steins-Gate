@@ -39,6 +39,7 @@ module.exports = {
             ['/note/js-algorithm', '算法相关'],
             ['/note/js-image', '图片相关'],
             ['/note/js-event', '事件相关'],
+            ['/note/js-data', '数据结构相关'],
             ['/note/js-vue', 'vue'],
             ['/note/js-rxjs', 'rxjs'],
           ]
