@@ -77,6 +77,7 @@ module.exports = {
           children: [
             ['/note/rust-hello', 'rust入门'],
             ['/note/rust-wasm', 'wasm'],
+            ['/note/rust-house', '一些库'],
           ]
         },
         {
