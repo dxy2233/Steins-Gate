@@ -1,93 +1,103 @@
-module.exports = {
+import { defaultTheme } from 'vuepress'
+
+export default {
   title: 'Pensieve',
   description: '一些记录与碎片提示',
   head: [
     ['link', { rel: 'icon', href: '/img/cat.ico' }]
   ],
-  themeConfig: {
-    nav: [
+  theme: defaultTheme({
+    navbar: [
       { text: '日常记录', link: '/note/package-yarn' },
     ],
     sidebar: {
       '/note/': [
         {
-          title: 'tool',
+          text: 'tool',
           collapsable: false,
           children: [
-            ['/note/package-yarn', 'yarn'],
-            ['/note/package-powershell', 'powershell'],
-            ['/note/package-editor', '编辑器'],
-            ['/note/package-git', 'git'],
-            ['/note/package-vim', 'vim'],
-            ['/note/package-gitlab', 'gitlab'],
+            '/note/package-yarn',
+            '/note/package-powershell',
+            '/note/package-editor',
+            '/note/package-git',
+            '/note/package-vim',
+            '/note/package-gitlab',
+            '/note/package-husky',
           ]
         },
         {
-          title: 'html',
+          text: 'wsl',
           collapsable: false,
           children: [
-            ['/note/html-tip', '不常用功能'],
+            '/note/wsl-proxy',
           ]
         },
         {
-          title: 'js',
+          text: 'html',
           collapsable: false,
           children: [
-            ['/note/js-math', 'math相关'],
-            ['/note/js-date', '日期相关'],
-            ['/note/js-api', 'api参考'],
-            ['/note/js-algorithm', '算法相关'],
-            ['/note/js-image', '图片相关'],
-            ['/note/js-event', '事件相关'],
-            ['/note/js-data', '数据结构相关'],
-            ['/note/js-vue', 'vue'],
-            ['/note/js-rxjs', 'rxjs'],
+            '/note/html-tip'
           ]
         },
         {
-          title: 'css',
+          text: 'js',
           collapsable: false,
           children: [
-            ['/note/css-effect', '一些效果'],
+            '/note/js-math',
+            '/note/js-date',
+            '/note/js-api',
+            '/note/js-algorithm',
+            '/note/js-image',
+            '/note/js-event',
+            '/note/js-data',
+            '/note/js-vue',
+            '/note/js-rxjs',
+          ]
+        },
+        // {
+        //   text: 'css',
+        //   collapsable: false,
+        //   children: [
+        //     '/note/css-effect',
+        //   ]
+        // },
+        {
+          text: 'node',
+          collapsable: false,
+          children: [
+            '/note/node-file',
+            '/note/node-svg',
           ]
         },
         {
-          title: 'node',
+          text: 'go',
           collapsable: false,
           children: [
-            ['/note/node-file', '文件操作'],
-            ['/note/node-svg', 'svg压缩工具'],
+            '/note/go-mod',
+            '/note/go-file',
+            '/note/go-http',
+            '/note/go-dirStruc',
+            '/note/go-house',
+            '/note/go-wasm',
           ]
         },
         {
-          title: 'go',
+          text: 'rust',
           collapsable: false,
           children: [
-            ['/note/go-mod', 'go mod'],
-            ['/note/go-file', '文件操作'],
-            ['/note/go-http', '网络相关'],
-            ['/note/go-dirStruc', '目录结构推荐'],
-            ['/note/go-house', '常用三方库'],
-            ['/note/go-wasm', 'wasm'],
+            '/note/rust-hello',
+            '/note/rust-wasm',
+            '/note/rust-house',
           ]
         },
         {
-          title: 'rust',
+          text: '杂项',
           collapsable: false,
           children: [
-            ['/note/rust-hello', 'rust入门'],
-            ['/note/rust-wasm', 'wasm'],
-            ['/note/rust-house', '一些库'],
-          ]
-        },
-        {
-          title: '杂项',
-          collapsable: false,
-          children: [
-            ['/note/sundry-m3u8', '视频流下载'],
+            '/note/sundry-m3u8',
           ]
         }
       ]
     }
- }
+  })
 }
