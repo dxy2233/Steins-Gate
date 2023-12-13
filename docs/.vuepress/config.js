@@ -88,6 +88,7 @@ export default {
             '/note/rust-hello',
             '/note/rust-wasm',
             '/note/rust-house',
+            '/note/rust-note',
           ]
         },
         {
