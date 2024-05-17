@@ -92,6 +92,13 @@ export default {
           ]
         },
         {
+          text: 'linux',
+          collapsable: false,
+          children: [
+            '/note/arch-hyprland',
+          ]
+        },
+        {
           text: '杂项',
           collapsable: false,
           children: [
