@@ -29,10 +29,20 @@ Rng 是一个trait
 - 值在任一时刻有且只有一个所有者
 - 当所有者(变量)离开作用域，这个值将被丢弃
 
+将值传递给函数，也同样适用该规则
+
 ```rust
   let s1 = String::from("hello");
   let s2 = s1;
   println!("{s1}, world!");
+  // js中是浅拷贝，s1、s2同时有效
+  // rust中则是所有权移动(move)到了s2，s1则不再有效
+```
+```rust
+  let s1 = String::from("hello");
+  let s2 = s1.clone();
+  println!("s1 = {s1}, s2 = {s2}");
+  // 深拷贝可以使用通用函数clone
 ```
 
 ## 常见概念
