@@ -21,6 +21,20 @@ Rng 是一个trait
 1. Result 是一种枚举类型，包含Ok和Err
    Result的实例拥有expect方法，Err会导致程序崩溃并显示传递的参数
 
+## 所有权
+
+### 所有权规则
+
+- 每一个值都有一个所有者(owner)
+- 值在任一时刻有且只有一个所有者
+- 当所有者(变量)离开作用域，这个值将被丢弃
+
+```rust
+  let s1 = String::from("hello");
+  let s2 = s1;
+  println!("{s1}, world!");
+```
+
 ## 常见概念
 
 ### 常量
@@ -173,6 +187,7 @@ fn main() {
 ```
 
 while
+
 ```rust
 fn main() {
     let mut number = 3;
@@ -188,6 +203,7 @@ fn main() {
 ```
 
 for
+
 ```rust
 fn main() {
     let a = [10, 20, 30, 40, 50];
