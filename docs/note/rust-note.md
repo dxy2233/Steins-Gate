@@ -45,6 +45,45 @@ Rng 是一个trait
   // 深拷贝可以使用通用函数clone
 ```
 
+### 引用
+
+不可变引用 
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+    let len = calculate_length(&s1);
+    println!("The length of '{s1}' is {len}.");
+}
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+```
+
+可变引用
+- 同作用域，有一个可变引用就不能有其它引用
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+    change(&mut s);
+}
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+```
+### slice
+
+`slice`允许你引用集合中一段连续的元素序列，而不用引用整个集合。slice 是一种引用，所以它没有所有权
+
+字符串slice
+```rust
+  let s = String::from("hello world");
+  let hello = &s[0..5];
+  let world = &s[6..11];
+```
+
+
 ## 常见概念
 
 ### 常量
