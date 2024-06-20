@@ -1,5 +1,56 @@
 # 圣经记录
 
+## 结构体struct
+```rust
+// 定义结构体
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+// 元组结构体
+struct Color(i32, i32, i32);
+
+// 类单元结构体
+struct AlwaysEqual;
+
+fn main() {
+  // 实例化
+  let user1 = User {
+    active: true,
+    username: String::from("someusername123"),
+    email: String::from("someone@example.com"),
+    sign_in_count: 1,
+  };
+
+  // 和js类似的叠加语法
+  // 此赋值和`=`赋值一样，会移动数据，所以该例中，user1不再有效，但如果所有移动元素都实现了`Copy trait`,移动后同样有效
+  let user2 = User {
+    email: String::from("another@example.com"),
+    ..user1
+  };
+
+  let black = Color(0, 0, 0);
+
+  let subject = AlwaysEqual;
+}
+
+// 和js一样简写
+fn build_user(email: String, username: String) -> User {
+    User {
+        active: true,
+        username,
+        email,
+        sign_in_count: 1,
+    }
+}
+```
+
+## 生命周期
+- 生命周期确保结构体引用的数据有效性跟结构体本身保持一致
+
 ## 关联函数
 
 ```rust
@@ -72,6 +123,7 @@ fn change(some_string: &mut String) {
     some_string.push_str(", world");
 }
 ```
+
 ### slice
 
 `slice`允许你引用集合中一段连续的元素序列，而不用引用整个集合。slice 是一种引用，所以它没有所有权
