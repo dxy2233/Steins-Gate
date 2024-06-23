@@ -1,6 +1,9 @@
 # 圣经记录
 
 ## 结构体struct
+
+基础定义 
+
 ```rust
 // 定义结构体
 struct User {
@@ -45,6 +48,35 @@ fn build_user(email: String, username: String) -> User {
         email,
         sign_in_count: 1,
     }
+}
+```
+
+赋予数据更多意义
+```rust
+// 打印调试结构体，必须显式选择这个功能
+// 派生trait Debug
+#[derive(Debug)]
+
+struct Rectangle {
+  width: u32,
+  height: u32,
+}
+fn main() {
+  let rect1 = Rectangle {
+    width: 30,
+    height: 50,
+  };
+  println!(
+    "The area of the rectangle is {area(&rect1)} square pixels."
+  );
+  println!("{rect1:?}");
+  println!("{rect1:#?}");
+
+  // dbg会打印到标准输出控制台流stdout，dbg!宏可以接收一个表达式的所有权，println!只能接收引用 
+  dbg!(&rect1);
+}
+fn area(rectangle: &Rectangle) -> u32 {
+  rectangle.width * rectangle.height
 }
 ```
 
