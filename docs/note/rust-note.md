@@ -2,7 +2,7 @@
 
 ## 结构体struct
 
-基础定义 
+### 基础定义
 
 ```rust
 // 定义结构体
@@ -52,6 +52,7 @@ fn build_user(email: String, username: String) -> User {
 ```
 
 赋予数据更多意义
+
 ```rust
 // 打印调试结构体，必须显式选择这个功能
 // 派生trait Debug
@@ -72,7 +73,7 @@ fn main() {
   println!("{rect1:?}");
   println!("{rect1:#?}");
 
-  // dbg会打印到标准输出控制台流stdout，dbg!宏可以接收一个表达式的所有权，println!只能接收引用 
+  // dbg会打印到标准输出控制台流stdout，dbg!宏可以接收一个表达式的所有权，println!只能接收引用
   dbg!(&rect1);
 }
 fn area(rectangle: &Rectangle) -> u32 {
@@ -80,16 +81,52 @@ fn area(rectangle: &Rectangle) -> u32 {
 }
 ```
 
-## 生命周期
-- 生命周期确保结构体引用的数据有效性跟结构体本身保持一致
+### 方法method
 
-## 关联函数
+与普通函数类似，但它是在结构体的上下文中被定义，低一个参数总是self
+
+```rust
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+// impl是implementation的缩写
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        rect1.area()
+    );
+}
+```
+
+### 关联函数
+
+- 所有在`impl`块中的函数都是关联函数
+- 不以`self`为第一参数的关联函数不是方法，常被用作返回一个结构体新实例的构造函数
+- 每个结构体都可以有多个`impl`块，和写在一个块中是等效的
 
 ```rust
 let mut guess = String::new();
 ```
 
 :: 语法表明 new 是 String 类型的一个 关联函数
+
+## 生命周期
+
+- 生命周期确保结构体引用的数据有效性跟结构体本身保持一致
 
 ## trait
 
@@ -121,6 +158,7 @@ Rng 是一个trait
   // js中是浅拷贝，s1、s2同时有效
   // rust中则是所有权移动(move)到了s2，s1则不再有效
 ```
+
 ```rust
   let s1 = String::from("hello");
   let s2 = s1.clone();
@@ -130,7 +168,7 @@ Rng 是一个trait
 
 ### 引用
 
-不可变引用 
+不可变引用
 
 ```rust
 fn main() {
@@ -144,6 +182,7 @@ fn calculate_length(s: &String) -> usize {
 ```
 
 可变引用
+
 - 同作用域，有一个可变引用就不能有其它引用
 
 ```rust
@@ -161,12 +200,12 @@ fn change(some_string: &mut String) {
 `slice`允许你引用集合中一段连续的元素序列，而不用引用整个集合。slice 是一种引用，所以它没有所有权
 
 字符串slice
+
 ```rust
   let s = String::from("hello world");
   let hello = &s[0..5];
   let world = &s[6..11];
 ```
-
 
 ## 常见概念
 
