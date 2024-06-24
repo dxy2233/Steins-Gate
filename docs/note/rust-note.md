@@ -124,9 +124,29 @@ let mut guess = String::new();
 
 :: 语法表明 new 是 String 类型的一个 关联函数
 
-## 生命周期
+## 枚举 enum
 
-- 生命周期确保结构体引用的数据有效性跟结构体本身保持一致
+定义枚举
+```rust
+enum IpAddrKind {
+  V4,
+  V6,
+}
+enum IpAddr{
+  V4(String),
+  V6(String),
+}
+
+fn main() {
+  // 最简单定义
+  let four = IpAddrKind::V4;
+  let six = IpAddrKind::V6;
+
+  // 初始化数据
+  let hoem = IpAddr::V4(String::from("127.0.0.1"));
+  let loopback = IpAddr::V6(String::from("::1"));
+}
+```
 
 ## trait
 
@@ -140,6 +160,11 @@ Rng 是一个trait
 
 1. Result 是一种枚举类型，包含Ok和Err
    Result的实例拥有expect方法，Err会导致程序崩溃并显示传递的参数
+
+
+## 生命周期
+
+- 生命周期确保结构体引用的数据有效性跟结构体本身保持一致
 
 ## 所有权
 
