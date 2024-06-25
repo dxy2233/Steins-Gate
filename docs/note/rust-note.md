@@ -126,7 +126,8 @@ let mut guess = String::new();
 
 ## 枚举 enum
 
-定义枚举
+### 定义枚举
+
 ```rust
 enum IpAddrKind {
   V4,
@@ -135,6 +136,11 @@ enum IpAddrKind {
 enum IpAddr{
   V4(String),
   V6(String),
+}
+impl IpAddr {
+  fn call(&self) {
+    // 和结构体一样可以定义方法
+  }
 }
 
 fn main() {
@@ -147,6 +153,63 @@ fn main() {
   let loopback = IpAddr::V6(String::from("::1"));
 }
 ```
+
+### Option
+
+- `Option`是标准库定义的一个枚举，不需要引入就可以使用
+- 它表示一个值要么有值要么没值
+- Rust中并没有`null`
+
+```rust
+enum Option<T> {
+  None,
+  Some(T),
+}
+
+let some_number = Some(5);
+let some_char = Some('e');
+let absent_number: Option<i32> = None; // 没有具体值时需要指定类型
+```
+
+### match
+
+```rust
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter,
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter => 25,
+    }
+}
+
+// match匹配必须是穷尽的
+let dice_roll = 9;
+match dice_roll {
+    3 => add_fancy_hat(),
+    7 => remove_fancy_hat(),
+    other => move_player(other),
+    _ => reroll(), // 不使用other的情况
+}
+```
+
+### if let
+- 比math简洁的控制流 
+
+```rust
+let config_max = Some(3u8);
+if let Some(max) = config_max {
+  println!("The maximum is configured to be {max}");
+}
+```
+
 
 ## trait
 
