@@ -201,7 +201,8 @@ match dice_roll {
 ```
 
 ### if let
-- 比math简洁的控制流 
+
+- 比math简洁的控制流
 
 ```rust
 let config_max = Some(3u8);
@@ -209,7 +210,6 @@ if let Some(max) = config_max {
   println!("The maximum is configured to be {max}");
 }
 ```
-
 
 ## trait
 
@@ -223,7 +223,6 @@ Rng 是一个trait
 
 1. Result 是一种枚举类型，包含Ok和Err
    Result的实例拥有expect方法，Err会导致程序崩溃并显示传递的参数
-
 
 ## 生命周期
 
@@ -480,3 +479,9 @@ fn main() {
     println!("LIFTOFF!!!");
 }
 ```
+
+## 项目组织
+
+### Crate
+
+- Crate有两种形式：二进制项(src/main.rs)和库(src/lib.rs)
