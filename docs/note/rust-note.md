@@ -485,3 +485,61 @@ fn main() {
 ### Crate
 
 - Crate有两种形式：二进制项(src/main.rs)和库(src/lib.rs)
+
+### 模块
+
+- `mod` 声明模块
+- `pub` 公有；结构体公有，不代表属性公有；枚举公有则完全公有 
+- `use` 引用 
+- `super` 类似..的语法，引用到父模块
+- `as` 类似js提供新的命名空间
+- `pub use` 重导出，允许别人导出这个引用
+- 模块树和文件树结构基本一致
+
+```rust
+// src/main.rs
+use crate::garden::vegetables::Asparagus;
+
+pub mod garden;
+
+fn main() {
+    let plant = Asparagus {};
+    println!("I'm growing {plant:?}!");
+}
+
+// src/garden.rs
+pub mod vegetables;
+```
+
+```rust
+// 模块公私有 
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+pub fn eat_at_restaurant() {
+    // 绝对路径
+    crate::front_of_house::hosting::add_to_waitlist();
+
+    // 相对路径
+    front_of_house::hosting::add_to_waitlist();
+}
+```
+
+```rust
+// use的嵌套路径
+use std::cmp::Ordering;
+use std::io;
+
+use std::{cmp::Ordering, io};
+
+use std::io;
+use std::io:Write;
+
+use std::{self, Write};
+
+// global
+use std::collections::*;
+```
