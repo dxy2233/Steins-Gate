@@ -211,6 +211,50 @@ if let Some(max) = config_max {
 }
 ```
 
+## 集合
+
+### Vector(Vec<T>)
+
+- 单独的数据结构中存储多于一个的值
+- 在内存中彼此相邻地排列所有值
+- 只能存储相同类型的值
+
+```rust
+// 空值的时候需要指定类型
+let v: Vec<i32> = Vec::new();
+
+let v = vec![1, 2, 3];
+
+// 更新
+let mut v = Vec::new();
+v.push(5);
+
+// 读取
+let v = vec![1, 2, 3, 4, 5];
+let third: &i32 = &v[2];
+let third: Option<&i32> = v.get(2);
+
+// 遍历
+let mut v = vec![100, 32, 57];
+for i in &mut v {
+  *i += 50;
+}
+
+// 变相存储不同类型数据
+enum SpreadsheetCell {
+    Int(i32),
+    Float(f64),
+    Text(String),
+}
+
+let row = vec![
+    SpreadsheetCell::Int(3),
+    SpreadsheetCell::Text(String::from("blue")),
+    SpreadsheetCell::Float(10.12),
+];
+
+```
+
 ## trait
 
 ```rust
@@ -489,8 +533,8 @@ fn main() {
 ### 模块
 
 - `mod` 声明模块
-- `pub` 公有；结构体公有，不代表属性公有；枚举公有则完全公有 
-- `use` 引用 
+- `pub` 公有；结构体公有，不代表属性公有；枚举公有则完全公有
+- `use` 引用
 - `super` 类似..的语法，引用到父模块
 - `as` 类似js提供新的命名空间
 - `pub use` 重导出，允许别人导出这个引用
@@ -512,7 +556,7 @@ pub mod vegetables;
 ```
 
 ```rust
-// 模块公私有 
+// 模块公私有
 mod front_of_house {
     pub mod hosting {
         pub fn add_to_waitlist() {}
@@ -543,3 +587,4 @@ use std::{self, Write};
 // global
 use std::collections::*;
 ```
+
