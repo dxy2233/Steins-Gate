@@ -255,6 +255,37 @@ let row = vec![
 
 ```
 
+### String
+
+- `String`是一个`Vec<u8>`的封装
+- Unicode的标量值可能不止一个字节，所以不能使用索引取值
+
+操作字符串最好的方法是明确表示需要字符还是字节
+
+```rust
+for c in "Зд".chars() {
+    println!("{c}");
+}
+for b in "Зд".bytes() {
+    println!("{b}");
+}
+```
+
+### HashMap
+
+```rust
+// 需要主动引入
+use std::collections::HashMap;
+
+let mut scores = HashMap::new();
+
+scores.insert(String::from("Blue"), 10);
+scores.insert(String::from("Yellow"), 50);
+
+let score = scores.get("Blue").copied().unwrap_or(0);
+
+```
+
 ## trait
 
 ```rust
@@ -265,8 +296,30 @@ Rng 是一个trait
 
 ## 错误处理
 
-1. Result 是一种枚举类型，包含Ok和Err
-   Result的实例拥有expect方法，Err会导致程序崩溃并显示传递的参数
+- Rust将错误分为两大类：可恢复的(recoverable)和不可恢复的(unrecoverable)
+
+### panic!
+
+- 用`panic!`处理不可恢复的错误
+
+错误时由展开切换为终止，二进制文件也会小一点
+
+```toml
+[profile.release]
+panic = 'abort'
+```
+
+### Result
+
+- 用`Result`处理可恢复错误
+- `Result`是一种枚举类型，包含Ok和Err；实例拥有`expect`方法，Err会导致程序崩溃并显示传递的参数
+
+```rust
+enum Result<T, E> {
+  Ok(T),
+  Err(E),
+}
+```
 
 ## 生命周期
 
@@ -587,4 +640,3 @@ use std::{self, Write};
 // global
 use std::collections::*;
 ```
-
