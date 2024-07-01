@@ -313,11 +313,40 @@ panic = 'abort'
 
 - 用`Result`处理可恢复错误
 - `Result`是一种枚举类型，包含Ok和Err；实例拥有`expect`方法，Err会导致程序崩溃并显示传递的参数
+- `unwarap`，出错时调用`panic!`
+- `expect`，出错时调用`pacic!`但可以自己定义文本
+- `?`，如果`Result`是`Ok`，则返回`Ok`中的值继续执行；如果是`Err`，`Err`将作为整个函数的返回值；所以只能在返回值为`Result`或`Option`的函数中使用
 
 ```rust
 enum Result<T, E> {
   Ok(T),
   Err(E),
+}
+
+use std::{fs::File, io::ErrorKind};
+
+fn main() {
+    let gretting_file_result = File::open("hello.txt");
+
+    let greeting_file = match gretting_file_result {
+        Ok(file) => file,
+        Err(error) => match error.kind() {
+            ErrorKind::NotFound => match File::create("hello.txt") {
+                Ok(fc) => fc,
+                Err(e) => panic!("{e:?}"),
+            },
+            other_error => {
+                panic!("{other_error:?}");
+            }
+        },
+    };
+}
+
+// ?
+fn read_username_from_file() -> Result<String, io::Error> {
+    let mut username = String::new();
+    let mut username_file = File::open("hello.txt")?.read_to_string(&mut username)?;
+    Ok(username)
 }
 ```
 
