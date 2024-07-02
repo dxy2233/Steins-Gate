@@ -213,7 +213,7 @@ if let Some(max) = config_max {
 
 ## 集合
 
-### Vector(Vec<T>)
+### Vector
 
 - 单独的数据结构中存储多于一个的值
 - 在内存中彼此相邻地排列所有值
@@ -288,17 +288,142 @@ let score = scores.get("Blue").copied().unwrap_or(0);
 
 ## trait
 
+- 定义共同行为
+
+### 基础概念
+
 ```rust
+// Rng 是一个trait
 use rand::Rng;
 ```
 
-Rng 是一个trait
+```rust
+// 定义一个Summary的trait
+pub trait Summary {
+    fn summarize(&self) -> String;
+}
+
+// 为NewsArticle和Tweet实现Summary特性
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.location)
+    }
+}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+
+// 默认实现
+impl Summary for NewsArticle {}
+
+// 默认实现可以和具体定义组合调用
+pub trait Summary {
+    fn summarize_author(&self) -> String;
+
+    fn summarize(&self) -> String {
+        format!("(Read more from {}...)", self.summarize_author())
+    }
+}
+impl Summary for Tweet {
+    fn summarize_author(&self) -> String {
+        format!("@{}", self.username)
+    }
+}
+
+```
+
+### 作为参数
+
+- notift函数体中，可以调用任何来自summary的trait的方法
+- `impl Trait`实际上是`trait bound`的语法糖
+
+```rust
+pub fn notify(item: &impl Summary) {
+    println!("Breaking news! {}", item.summarize());
+}
+
+```
+
+### trait bound和where
+
+```rust
+pub fn notify<T: Summary>(item: &T) {
+    println!("Breaking news! {}", item.summarize());
+}
+
+fn some_function<T, U>(t: &T, u: &U) -> i32
+where
+    T: Display + Clone,
+    U: Clone + Debug,
+{
+
+```
+
+### 返回实现了trait的类型
+
+```rust
+fn returns_summarizable() -> impl Summary {
+    Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from(
+            "of course, as you probably already know, people",
+        ),
+        reply: false,
+        retweet: false,
+    }
+}
+```
+
+### 使用`trait bound`有条件的实现方法
+
+```rust
+use std::fmt::Display;
+
+struct Pair<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Pair<T> {
+    fn new(x: T, y: T) -> Self {
+        Self { x, y }
+    }
+}
+
+impl<T: Display + PartialOrd> Pair<T> {
+    fn cmp_display(&self) {
+        if self.x >= self.y {
+            println!("The largest member is x = {}", self.x);
+        } else {
+            println!("The largest member is y = {}", self.y);
+        }
+    }
+}
+
+```
 
 ## 错误处理
 
 - Rust将错误分为两大类：可恢复的(recoverable)和不可恢复的(unrecoverable)
 
-### panic!
+### `panic!`
 
 - 用`panic!`处理不可恢复的错误
 
@@ -347,6 +472,70 @@ fn read_username_from_file() -> Result<String, io::Error> {
     let mut username = String::new();
     let mut username_file = File::open("hello.txt")?.read_to_string(&mut username)?;
     Ok(username)
+}
+```
+
+## 泛型
+
+基础使用
+
+```rust
+fn main() {
+    let number_list = vec![34, 50, 25, 100, 65];
+    let res = largest(&number_list);
+    println!("The largest number is {res}");
+
+    let char_list = vec!['y', 'm', 'a', 'q'];
+    let res_char = largest(&char_list);
+    println!("The largest number is {res_char}");
+}
+
+fn largest<T: PartialOrd>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+
+    for number in list {
+        if number > largest {
+            largest = number;
+        }
+    }
+
+    largest
+}
+```
+
+结构体定义不同类型
+
+```rust
+struct Point<T, U> {
+  x: T,
+  y: U,
+}
+```
+
+区分不同的参数
+
+```rust
+struct Point<X1, Y1> {
+    x: X1,
+    y: Y1,
+}
+
+impl<X1, Y1> Point<X1, Y1> {
+    fn mixup<X2, Y2>(self, other: Point<X2, Y2>) -> Point<X1, Y2> {
+        Point {
+            x: self.x,
+            y: other.y,
+        }
+    }
+}
+
+fn main() {
+    let p1 = Point { x: 5, y: 10.4 };
+    let p2 = Point { x: "Hello", y: 'c' };
+
+    let p3 = p1.mixup(p2);
+
+    println!("p3.x = {}, p3.y = {}", p3.x, p3.y);
 }
 ```
 
