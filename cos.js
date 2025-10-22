@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const COS = require('cos-nodejs-sdk-v5')
-const local = require('./local.js')
+const { local } = require('./local.js')
 
 const cos = new COS({
     SecretId: local.id,
