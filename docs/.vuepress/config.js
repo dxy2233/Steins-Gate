@@ -1,6 +1,10 @@
-import { defaultTheme } from 'vuepress'
+import { viteBundler } from '@vuepress/bundler-vite'
+import { defaultTheme } from '@vuepress/theme-default'
+import { defineUserConfig } from 'vuepress'
 
-export default {
+export default defineUserConfig({
+  bundler: viteBundler(),
+
   title: 'Pensieve',
   description: '一些记录与碎片提示',
   head: [
@@ -108,4 +112,4 @@ export default {
       ]
     }
   })
-}
+})
