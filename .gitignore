@@ -8,6 +8,7 @@ dist/
 local.js
 .temp
 .cache
+.astro
 
 # Log files
 npm-debug.log*

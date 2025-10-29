@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "vuepress dev docs",
-    "build": "vuepress build docs && node cos"
+    "build": "vuepress build docs && node cos",
+    "devA": "astro dev",
+    "buildA": "astro build && node coaA"
   },
   "devDependencies": {
     "@vuepress/bundler-vite": "2.0.0-rc.24",
@@ -17,5 +19,11 @@
     "sass-embedded": "^1.93.2",
     "vue": "^3.5.22",
     "vuepress": "2.0.0-rc.24"
+  },
+  "dependencies": {
+    "@astrojs/svelte": "^7.2.0",
+    "astro": "^5.15.1",
+    "svelte": "^5.42.3",
+    "typescript": "^5.9.3"
   }
 }

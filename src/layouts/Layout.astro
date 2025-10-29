@@ -1,0 +1,27 @@
+---
+import { ClientRouter } from 'astro:transitions'
+---
+
+<!doctype html>
+<html lang="en" data-theme="sprint" data-mode="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="icon" type="image/svg+xml" href="https://note.peppercoke.com/img/cat.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <ClientRouter />
+    <title>Pensieve</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style>
+  body { 
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+  }
+</style>
